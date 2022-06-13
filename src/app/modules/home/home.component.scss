@@ -1,0 +1,16 @@
+body {
+  scroll-behavior: smooth;
+}
+
+#nav {
+  z-index: 3;
+
+  .nav-item {
+    opacity: 0.5;
+    transition: opacity 0.15s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
