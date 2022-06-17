@@ -11,7 +11,6 @@ export class RepoNamePipe implements PipeTransform {
         .replace(/Ci(?=\s|$)/, "")
         .replace(/.*Cd/i, "CI/CD")
         .replace("Aws", "AWS")
-        .replace(":fire:", "🔥")
     );
   }
 }

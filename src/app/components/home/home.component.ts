@@ -12,6 +12,10 @@ export class HomeComponent implements OnInit {
    */
   public showNavbarBorder: boolean = false;
   /**
+   * Flag that indicates which color theme is being used
+   */
+  public isDarkTheme: boolean = false;
+  /**
    * Last projects from Github
    */
   public projects: any[] = [];
@@ -28,6 +32,8 @@ export class HomeComponent implements OnInit {
     this.fetchData();
     this.isScrolling();
   }
+
+  // #region Public Methods
 
   public isScrolling(): void {
     // Transient variable to avoid "this" conflict
@@ -52,6 +58,17 @@ export class HomeComponent implements OnInit {
     };
   }
 
+  public toArray(obj: any): any[] {
+    return Object.keys(obj).map((key) => obj[key]);
+  }
+
+  public toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+    console.log(this.isDarkTheme);
+  }
+  // #endregion
+
+  //#region Private Methods
   private async fetchData(): Promise<void> {
     this.homeService
       .getGithubData()
@@ -62,8 +79,5 @@ export class HomeComponent implements OnInit {
         console.log(err);
       });
   }
-
-  public toArray(obj: any): any[] {
-    return Object.keys(obj).map((key) => obj[key]);
-  }
+  //#endregion
 }
