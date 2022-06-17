@@ -16,10 +16,6 @@ export class HomeComponent implements OnInit {
    */
   public projects: any[] = [];
   /**
-   * Images list for the last projects
-   */
-  public images: string[] = ["https://unsplash.com/photos/Lljll19NXZk", "", ""];
-  /**
    * Home Service
    */
   private homeService: HomeService;
@@ -60,14 +56,14 @@ export class HomeComponent implements OnInit {
     this.homeService
       .getGithubData()
       .then((data: any) => {
-        for (let i = 0; i < data.length; i++) {
-          data.image = this.images[i];
-        }
-
         this.projects = data;
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  public toArray(obj: any): any[] {
+    return Object.keys(obj).map((key) => obj[key]);
   }
 }

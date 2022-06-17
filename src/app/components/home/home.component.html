@@ -60,7 +60,7 @@
         <div class="flex flex-row my-8 justify-left">
           <button class="py-2 m-3 font-bold">
             <a href="#about" class="">
-              <span class="font-base btn-primary">Know more</span>
+              <span class="font-medium btn-primary">Know more</span>
             </a>
           </button>
         </div>
@@ -114,10 +114,10 @@
             </span>
           </h2>
 
-          <div class="grid grid-cols-3 gap-12">
+          <div class="grid grid-cols-3 gap-4">
             <div
-              class="flex flex-col justify-between max-w-sm col-span-1 mt-10 text-sm repo-card"
-              *ngFor="let project of projects; index as i"
+              class="flex flex-col justify-between col-span-1 mt-10 text-sm repo-card"
+              *ngFor="let project of projects"
             >
               <div class="mb-4">
                 <div class="mb-2 text-lg font-bold text-left">
@@ -128,28 +128,27 @@
 
               <mat-divider></mat-divider>
 
-              <div class="flex flex-col justify-center max-w-sm mt-4">
+              <mat-chip-list aria-label="Topics" class="my-3">
+                <mat-chip
+                  class="text-white bg-indigo-700 opacity-80 hover:opacity-100"
+                  color="primary"
+                  *ngFor="let topic of toArray(project.topics)"
+                >
+                  {{ topic }}
+                </mat-chip>
+              </mat-chip-list>
+
+              <mat-divider></mat-divider>
+
+              <div class="flex flex-col justify-center max-w-sm mt-4" matRipple>
                 <button class="btn btn-primary">
                   <a href="{{ project.html_url }}" target="_blank">
-                    Go to project</a
-                  >
+                    Go to project
+                  </a>
                 </button>
               </div>
             </div>
           </div>
-
-          <!-- <p id="projects" class="my-10 text-lg">
-            <span class="text-bold"> Here are some of my projects. </span>
-            <br />
-            I always have been fascinated for Pellentesque habitant morbi<br />
-            tristique senectus et netus et malesuada fames ac turpis egestas.<br />
-            Suspendisse potenti. Donec in ultricies risus.
-            <br /><br />
-            Nulla tempus tempor metus nec maximus. Pellentesque habitant morbi
-            tristique senectus et<br />
-            netus et malesuada fames ac turpis egestas. Duis eu congue massa.
-            Curabitur aliquet convallis commodo.
-          </p> -->
         </h2>
       </span>
 
