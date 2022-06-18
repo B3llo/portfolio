@@ -1,4 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import {
+  faGithub,
+  faInstagram,
+  faLinkedinIn,
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { HomeService } from "./home.service";
 
 @Component({
@@ -23,6 +29,12 @@ export class HomeComponent implements OnInit {
    * Home Service
    */
   private homeService: HomeService;
+
+  // Fontawesome icons
+  public faGithub = faGithub;
+  public faLinkedIn = faLinkedinIn;
+  public faInstagram = faInstagram;
+  public faEnvelope = faEnvelope;
 
   constructor(homeService: HomeService) {
     this.homeService = homeService;

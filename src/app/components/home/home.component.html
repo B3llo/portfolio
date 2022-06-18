@@ -7,7 +7,7 @@
     <div class="scroll-smooth">
       <header
         [ngClass]="{ 'border-b': showNavbarBorder }"
-        class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-300 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm dark:backdrop-blur-sm bg-neutral-50"
+        class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-700 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm dark:backdrop-blur-sm bg-neutral-50"
       >
         <h1 class="mx-10 mt-4 text-3xl font-medium font-bodoni">
           <a href="#">Bello</a>
@@ -43,8 +43,8 @@
       </header>
 
       <main class="dark:bg-neutral-900 dark:text-slate-200">
-        <div class="grid w-3/4 grid-cols-9 mx-auto font-medium">
-          <span class="col-span-8 mb-14 mt-44">
+        <div class="grid w-5/6 grid-cols-9 mx-auto font-medium sm:w-3/4">
+          <span class="col-span-8 mt-16 mb-14 sm:mt-44">
             <h2
               class="flex flex-col justify-between my-8 text-5xl font-poppins"
             >
@@ -111,7 +111,7 @@
           </div>
 
           <span
-            class="justify-center w-2 col-span-1 my-16 align-top rounded bg-cyan-500 h-5/6"
+            class="justify-center w-2 col-span-1 my-16 align-top bg-indigo-700 rounded dark:bg-cyan-400 h-5/6"
           ></span>
 
           <span class="col-span-8 mt-16" id="about">
@@ -142,7 +142,7 @@
           </span>
         </div>
 
-        <div class="w-3/4 mx-auto mt-10 font-medium" id="projects">
+        <div class="w-4/5 mx-auto mt-10 font-medium sm:w-3/4" id="projects">
           <span>
             <h2
               class="flex flex-col justify-between my-32 text-5xl font-poppins"
@@ -173,7 +173,7 @@
 
                   <mat-chip-list aria-label="Topics" class="my-3">
                     <mat-chip
-                      class="text-white bg-indigo-700 opacity-80 hover:opacity-100"
+                      class="text-white bg-indigo-700 dark:bg-cyan-300 dark:text-black opacity-80 hover:opacity-100"
                       color="primary"
                       *ngFor="let topic of toArray(project.topics)"
                     >
@@ -198,17 +198,26 @@
                 </div>
               </div>
             </h2>
-          </span>
 
-          <!-- <div
-        class="flex justify-center w-0.5 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-72"
-        >
-        <div id="projectsPoint"></div>
-      </div> -->
+            <!-- <div class="flex items-center justify-center w-full p-4 mt-8 mb-32">
+              <a
+                href="https://github.com/B3llo/"
+                target="_blank"
+                class="flex items-center justify-center"
+              >
+                <span class="mr-3 font-medium"> See more projects </span>
+                <fa-icon
+                  [icon]="faGithub"
+                  size="3x"
+                  alt="Github B3llo"
+                ></fa-icon>
+              </a>
+            </div> -->
+          </span>
 
           <span id="contact">
             <h2
-              class="flex flex-col justify-between mb-20 text-5xl dark:mb-0 font-poppins"
+              class="flex flex-col justify-between text-5xl dark:mb-0 font-poppins"
             >
               <span class="font-normal">
                 <span class="font-semibold">Contact</span>
@@ -228,9 +237,53 @@
                 massa. Curabitur aliquet convallis commodo.
               </p>
             </h2>
+
+            <div
+              class="flex items-center justify-between w-1/5 mx-auto mb-20 dark:mb-0"
+            >
+              <a href="https://github.com/B3llo/" target="_blank">
+                <fa-icon
+                  [icon]="faGithub"
+                  size="2x"
+                  alt="Github Logo"
+                ></fa-icon>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/gabriel-felipe-bello-075032208/"
+                target="_blank"
+              >
+                <fa-icon
+                  [icon]="faLinkedIn"
+                  size="2x"
+                  alt="LinkedIn Logo"
+                ></fa-icon>
+              </a>
+
+              <a
+                href="https://www.instagram.com/gabriel_b3llo/"
+                target="_blank"
+              >
+                <fa-icon
+                  [icon]="faInstagram"
+                  size="2x"
+                  alt="Instagram Logo"
+                ></fa-icon>
+              </a>
+
+              <a href="mailto:gfbello.x@gmail.com" target="_blank">
+                <fa-icon
+                  [icon]="faEnvelope"
+                  size="2x"
+                  alt="Email Logo"
+                ></fa-icon>
+              </a>
+            </div>
           </span>
         </div>
       </main>
+
+      <div class="hidden w-full h-20 dark:block dark:bg-neutral-900"></div>
 
       <footer
         class="flex justify-center w-full p-3 dark:text-slate-200 dark:bg-neutral-900"
