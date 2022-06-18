@@ -72,3 +72,10 @@ body {
     height: 50px;
   }
 }
+
+#repos {
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr !important;
+  }
+}

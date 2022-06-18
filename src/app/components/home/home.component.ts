@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
 
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
-    console.log(this.isDarkTheme);
   }
   // #endregion
 
