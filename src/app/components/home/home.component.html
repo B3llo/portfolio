@@ -1,205 +1,242 @@
-<div class="scroll-smooth">
-  <header
-    [ngClass]="{ 'border-b': showNavbarBorder }"
-    class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 backdrop-blur-sm bg-neutral-50"
-  >
-    <h1 class="mx-10 mt-4 text-3xl font-medium font-bodoni">
-      <a href="#">Bello</a>
-    </h1>
-
-    <nav class="w-1/4" id="nav">
-      <ul class="flex justify-between mt-4 mr-24">
-        <li class="nav-item">
-          <a href="#about">About</a>
-          <span class=""></span>
-        </li>
-        <li class="nav-item">
-          <a href="#projects">Projects</a>
-          <span class=""></span>
-        </li>
-        <li class="nav-item">
-          <a href="#contact">Contact</a>
-          <span class=""></span>
-        </li>
-
-        <li
-          class="flex items-center transition duration-300 ease-in-out cursor-pointer nav-item"
-          (click)="toggleTheme()"
-        >
-          <mat-icon id="theme-toggle" [ngClass]="{ 'rotate-180': isDarkTheme }"
-            >brightness_medium</mat-icon
-          >
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <div class="grid w-3/4 grid-cols-9 mx-auto font-medium">
-      <span class="col-span-8 mb-14 mt-44">
-        <h2 class="flex flex-col justify-between my-8 text-5xl font-poppins">
-          <span class="font-normal">
-            Hi, I&apos;m
-            <span class="font-semibold">Gabriel F. Bello</span>
-          </span>
-
-          <span class=""></span>
-        </h2>
-
-        <div class="flex flex-row">
-          <p class="w-4/5 text-xl">
-            <span class="text-xl">
-              Fullstack developer, student and runner. <br />
-              Currently in college and loving to work with
-            </span>
-            <span class="">
-              <span class="font-bold text-blue-800">Angular</span>,
-              <span class="font-bold text-blue-800">Node</span> and
-              <span class="font-bold text-blue-800">Docker</span>
-            </span>
-            <br />
-            <br />
-            <span class="opacity-85">
-              Constantly studying and improving <br />
-              to make better code, wonderful designs and having some fun.
-            </span>
-          </p>
-        </div>
-
-        <div class="flex flex-row my-8 justify-left">
-          <button class="py-2 m-3 font-bold">
-            <a href="#about" class="">
-              <span
-                class="flex items-center justify-center font-medium btn-primary"
-                >Know more
-                <mat-icon>chevron_right</mat-icon>
-              </span>
-            </a>
-          </button>
-        </div>
-      </span>
-
-      <div
-        class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-72"
+<html
+  [ngClass]="{
+    dark: isDarkTheme
+  }"
+>
+  <body class="">
+    <div class="scroll-smooth">
+      <header
+        [ngClass]="{ 'border-b': showNavbarBorder }"
+        class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-300 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm dark:backdrop-blur-sm bg-neutral-50"
       >
-        <div id="introPoint"></div>
-      </div>
+        <h1 class="mx-10 mt-4 text-3xl font-medium font-bodoni">
+          <a href="#">Bello</a>
+        </h1>
 
-      <span
-        class="justify-center w-2 col-span-1 my-16 align-top bg-indigo-700 rounded h-5/6"
-      ></span>
+        <nav class="w-1/4" id="nav">
+          <ul class="flex justify-between mt-4 mr-24">
+            <li class="nav-item">
+              <a href="#about">About</a>
+              <span class=""></span>
+            </li>
+            <li class="nav-item">
+              <a href="#projects">Projects</a>
+              <span class=""></span>
+            </li>
+            <li class="nav-item">
+              <a href="#contact">Contact</a>
+              <span class=""></span>
+            </li>
 
-      <span class="col-span-8 mt-16" id="about">
-        <h2 class="flex flex-col justify-between mt-8 text-5xl font-poppins">
-          <span class="font-normal">
-            <span class="font-semibold">About</span>
-            Me
-          </span>
-
-          <p class="my-10 text-lg">
-            <span class="text-bold">
-              Hello! My name is Gabriel and I build things for the web.
-            </span>
-            <br />
-            I always have been fascinated for Pellentesque habitant morbi<br />
-            tristique senectus et netus et malesuada fames ac turpis egestas.<br />
-            Suspendisse potenti. Donec in ultricies risus.
-            <br /><br />
-            Nulla tempus tempor metus nec maximus. Pellentesque habitant morbi
-            tristique senectus et<br />
-            netus et malesuada fames ac turpis egestas. Duis eu congue massa.
-            Curabitur aliquet convallis commodo.
-          </p>
-        </h2>
-      </span>
-    </div>
-
-    <div class="w-3/4 mx-auto mt-10 font-medium" id="projects">
-      <span>
-        <h2 class="flex flex-col justify-between my-32 text-5xl font-poppins">
-          <span class="font-normal">
-            <span class="font-semibold">Projects</span>
-          </span>
-
-          <h2>
-            <span class="text-xl font-light">
-              Here are some of my recent projects.
-            </span>
-          </h2>
-
-          <div class="grid gap-4 sm:grid-cols-3" id="repos">
-            <div
-              class="flex flex-col justify-between row-span-1 mt-10 text-sm sm:col-span-1 repo-card"
-              *ngFor="let project of projects"
+            <li
+              class="flex items-center transition duration-300 ease-in-out cursor-pointer nav-item"
+              (click)="toggleTheme()"
             >
-              <div class="mb-4">
-                <div class="mb-2 text-lg font-bold text-left">
-                  {{ project.name | repoName }}
-                </div>
-                <div>{{ project.description | emoji }}</div>
-              </div>
+              <mat-icon
+                id="theme-toggle"
+                [ngClass]="{ 'rotate-180': isDarkTheme }"
+                >brightness_medium</mat-icon
+              >
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-              <mat-divider></mat-divider>
+      <main class="dark:bg-neutral-900 dark:text-slate-200">
+        <div class="grid w-3/4 grid-cols-9 mx-auto font-medium">
+          <span class="col-span-8 mb-14 mt-44">
+            <h2
+              class="flex flex-col justify-between my-8 text-5xl font-poppins"
+            >
+              <span class="font-normal">
+                Hi, I&apos;m
+                <span class="font-semibold">Gabriel F. Bello</span>
+              </span>
 
-              <mat-chip-list aria-label="Topics" class="my-3">
-                <mat-chip
-                  class="text-white bg-indigo-700 opacity-80 hover:opacity-100"
-                  color="primary"
-                  *ngFor="let topic of toArray(project.topics)"
-                >
-                  {{ topic }}
-                </mat-chip>
-              </mat-chip-list>
+              <span class=""></span>
+            </h2>
 
-              <mat-divider></mat-divider>
-
-              <div class="flex flex-col justify-center max-w-sm mt-4">
-                <button class="btn btn-primary">
-                  <a
-                    href="{{ project.html_url }}"
-                    target="_blank"
-                    class="flex flex-row items-center justify-center"
+            <div class="flex flex-row">
+              <p class="w-4/5 text-xl">
+                <span class="text-xl">
+                  Fullstack developer, student and runner. <br />
+                  Currently in college and loving to work with
+                </span>
+                <span class="">
+                  <span class="font-bold text-blue-800 dark:text-cyan-500"
+                    >Angular</span
+                  >,
+                  <span class="font-bold text-blue-800 dark:text-cyan-500"
+                    >Node</span
                   >
-                    Go to project
-                    <mat-icon>arrow_right</mat-icon>
-                  </a>
-                </button>
-              </div>
+                  and
+                  <span class="font-bold text-blue-800 dark:text-cyan-500"
+                    >Docker</span
+                  >
+                </span>
+                <br />
+                <br />
+                <span class="opacity-85">
+                  Constantly studying and improving <br />
+                  to make better code, wonderful designs and having some fun.
+                </span>
+              </p>
             </div>
-          </div>
-        </h2>
-      </span>
 
-      <!-- <div
+            <div class="flex flex-row my-8 justify-left">
+              <button class="py-2 m-3 font-bold">
+                <a href="#about" class="">
+                  <span
+                    class="flex items-center justify-center font-medium btn-primary"
+                    >Know more
+                    <mat-icon>chevron_right</mat-icon>
+                  </span>
+                </a>
+              </button>
+            </div>
+          </span>
+
+          <div
+            *ngIf="!isDarkTheme"
+            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-72"
+          >
+            <div id="ripple"></div>
+          </div>
+
+          <div
+            *ngIf="isDarkTheme"
+            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-white to-neutral-900 rounded-md mt-72"
+          >
+            <div id="rippleDark"></div>
+          </div>
+
+          <span
+            class="justify-center w-2 col-span-1 my-16 align-top rounded bg-cyan-500 h-5/6"
+          ></span>
+
+          <span class="col-span-8 mt-16" id="about">
+            <h2
+              class="flex flex-col justify-between mt-8 text-5xl font-poppins"
+            >
+              <span class="font-normal">
+                <span class="font-semibold">About</span>
+                Me
+              </span>
+
+              <p class="my-10 text-lg">
+                <span class="text-bold">
+                  Hello! My name is Gabriel and I build things for the web.
+                </span>
+                <br />
+                I always have been fascinated for Pellentesque habitant morbi<br />
+                tristique senectus et netus et malesuada fames ac turpis
+                egestas.<br />
+                Suspendisse potenti. Donec in ultricies risus.
+                <br /><br />
+                Nulla tempus tempor metus nec maximus. Pellentesque habitant
+                morbi tristique senectus et<br />
+                netus et malesuada fames ac turpis egestas. Duis eu congue
+                massa. Curabitur aliquet convallis commodo.
+              </p>
+            </h2>
+          </span>
+        </div>
+
+        <div class="w-3/4 mx-auto mt-10 font-medium" id="projects">
+          <span>
+            <h2
+              class="flex flex-col justify-between my-32 text-5xl font-poppins"
+            >
+              <span class="font-normal">
+                <span class="font-semibold">Projects</span>
+              </span>
+
+              <h2>
+                <span class="text-xl font-light">
+                  Here are some of my recent projects.
+                </span>
+              </h2>
+
+              <div class="grid gap-4 sm:grid-cols-3" id="repos">
+                <div
+                  class="flex flex-col justify-between row-span-1 mt-10 text-sm sm:col-span-1 repo-card"
+                  *ngFor="let project of projects"
+                >
+                  <div class="mb-4">
+                    <div class="mb-2 text-lg font-bold text-left">
+                      {{ project.name | repoName }}
+                    </div>
+                    <div>{{ project.description | emoji }}</div>
+                  </div>
+
+                  <mat-divider></mat-divider>
+
+                  <mat-chip-list aria-label="Topics" class="my-3">
+                    <mat-chip
+                      class="text-white bg-indigo-700 opacity-80 hover:opacity-100"
+                      color="primary"
+                      *ngFor="let topic of toArray(project.topics)"
+                    >
+                      {{ topic }}
+                    </mat-chip>
+                  </mat-chip-list>
+
+                  <mat-divider></mat-divider>
+
+                  <div class="flex flex-col justify-center max-w-sm mt-4">
+                    <button class="btn btn-primary">
+                      <a
+                        href="{{ project.html_url }}"
+                        target="_blank"
+                        class="flex flex-row items-center justify-center"
+                      >
+                        Go to project
+                        <mat-icon>arrow_right</mat-icon>
+                      </a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </span>
+
+          <!-- <div
         class="flex justify-center w-0.5 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-72"
-      >
+        >
         <div id="projectsPoint"></div>
       </div> -->
 
-      <span id="contact">
-        <h2 class="flex flex-col justify-between mb-20 text-5xl font-poppins">
-          <span class="font-normal">
-            <span class="font-semibold">Contact</span>
+          <span id="contact">
+            <h2
+              class="flex flex-col justify-between mb-20 text-5xl dark:mb-0 font-poppins"
+            >
+              <span class="font-normal">
+                <span class="font-semibold">Contact</span>
+              </span>
+
+              <p id="contact" class="my-10 text-lg">
+                <span class="text-bold"> Here are some of my projects. </span>
+                <br />
+                I always have been fascinated for Pellentesque habitant morbi<br />
+                tristique senectus et netus et malesuada fames ac turpis
+                egestas.<br />
+                Suspendisse potenti. Donec in ultricies risus.
+                <br /><br />
+                Nulla tempus tempor metus nec maximus. Pellentesque habitant
+                morbi tristique senectus et<br />
+                netus et malesuada fames ac turpis egestas. Duis eu congue
+                massa. Curabitur aliquet convallis commodo.
+              </p>
+            </h2>
           </span>
+        </div>
+      </main>
 
-          <p id="contact" class="my-10 text-lg">
-            <span class="text-bold"> Here are some of my projects. </span>
-            <br />
-            I always have been fascinated for Pellentesque habitant morbi<br />
-            tristique senectus et netus et malesuada fames ac turpis egestas.<br />
-            Suspendisse potenti. Donec in ultricies risus.
-            <br /><br />
-            Nulla tempus tempor metus nec maximus. Pellentesque habitant morbi
-            tristique senectus et<br />
-            netus et malesuada fames ac turpis egestas. Duis eu congue massa.
-            Curabitur aliquet convallis commodo.
-          </p>
-        </h2>
-      </span>
+      <footer
+        class="flex justify-center w-full p-3 dark:text-slate-200 dark:bg-neutral-900"
+      >
+        <p class="text-sm">© 2022 Gabriel F. Bello. All rights reserved.</p>
+      </footer>
     </div>
-  </main>
-
-  <footer class="flex justify-center w-full p-3">
-    <p class="text-sm">© 2022 Gabriel F. Bello. All rights reserved.</p>
-  </footer>
-</div>
+  </body>
+</html>

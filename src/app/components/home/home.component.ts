@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   /**
    * Flag that indicates which color theme is being used
    */
-  public isDarkTheme: boolean = false;
+  public isDarkTheme: boolean = true;
   /**
    * Last projects from Github
    */
