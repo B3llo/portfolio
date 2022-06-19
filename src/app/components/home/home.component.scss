@@ -116,3 +116,9 @@ body {
     grid-template-rows: 1fr 1fr 1fr !important;
   }
 }
+
+.ripplePoint {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
