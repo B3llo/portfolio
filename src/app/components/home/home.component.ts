@@ -1,8 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import {
+  faAngular,
+  faDocker,
   faGithub,
   faInstagram,
   faLinkedinIn,
+  faNodeJs,
+  faReact,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { HomeService } from "./home.service";
@@ -30,17 +34,30 @@ export class HomeComponent implements OnInit {
    */
   private homeService: HomeService;
 
-  // Fontawesome icons
+  // Social icons
   public faGithub = faGithub;
   public faLinkedIn = faLinkedinIn;
   public faInstagram = faInstagram;
   public faEnvelope = faEnvelope;
+
+  // Technologies Icons
+  public faAngular = faAngular;
+  public faNodeJS = faNodeJs;
+  public faDocker = faDocker;
+  public faReact = faReact;
 
   constructor(homeService: HomeService) {
     this.homeService = homeService;
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem("isDarkTheme") !== null) {
+      this.isDarkTheme =
+        localStorage.getItem("isDarkTheme") === "true" ? true : false;
+    } else {
+      localStorage.setItem("isDarkTheme", "false");
+    }
+
     this.fetchData();
     this.isScrolling();
   }
@@ -76,6 +93,7 @@ export class HomeComponent implements OnInit {
 
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
+    localStorage.setItem("isDarkTheme", this.isDarkTheme.toString());
   }
   // #endregion
 

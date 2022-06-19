@@ -98,14 +98,14 @@
 
           <div
             *ngIf="!isDarkTheme"
-            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-72"
+            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-56"
           >
             <div id="ripple"></div>
           </div>
 
           <div
             *ngIf="isDarkTheme"
-            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-white to-neutral-900 rounded-md mt-72"
+            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-white to-neutral-900 rounded-md mt-56"
           >
             <div id="rippleDark"></div>
           </div>
@@ -142,10 +142,116 @@
           </span>
         </div>
 
+        <div class="">
+          <div class="flex w-4/5 mx-auto font-medium item-center sm:w-3/4">
+            <h2 class="flex flex-col my-8 text-3xl font-poppins">
+              <span class="font-semibold">Technologies</span>
+
+              <div class="flex flex-row w-2/5 px-10 mt-5 font-bold">
+                <div class="flex flex-col items-start justify-center">
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >Node</span
+                      >
+                    </span>
+                  </span>
+
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >Docker</span
+                      >
+                    </span>
+                  </span>
+
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >Kubernetes</span
+                      >
+                    </span>
+                  </span>
+                </div>
+
+                <div class="flex flex-col items-start justify-center mx-12">
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >Angular</span
+                      >
+                    </span>
+                  </span>
+
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >React</span
+                      >
+                    </span>
+                  </span>
+
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >Nest.js</span
+                      >
+                    </span>
+                  </span>
+                </div>
+
+                <div class="flex flex-col items-start justify-center">
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >Typescript</span
+                      >
+                    </span>
+                  </span>
+
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >MongoDB</span
+                      >
+                    </span>
+                  </span>
+
+                  <span class="flex flex-row items-center justify-center">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+
+                    <span class="text-xl">
+                      <span class="text-indigo-700 dark:text-cyan-500"
+                        >PostgreSQL</span
+                      >
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </h2>
+          </div>
+        </div>
+
         <div class="w-4/5 mx-auto mt-10 font-medium sm:w-3/4" id="projects">
           <span>
             <h2
-              class="flex flex-col justify-between my-32 text-5xl font-poppins"
+              class="flex flex-col justify-between mt-32 text-5xl font-poppins"
             >
               <span class="font-normal">
                 <span class="font-semibold">Projects</span>
@@ -199,96 +305,120 @@
               </div>
             </h2>
 
-            <!-- <div class="flex items-center justify-center w-full p-4 mt-8 mb-32">
+            <div
+              class="flex items-center justify-center w-full p-4 mt-8 mb-32 dark:hover:text-white hover:text-neutral-900"
+            >
               <a
                 href="https://github.com/B3llo/"
                 target="_blank"
                 class="flex items-center justify-center"
               >
-                <span class="mr-3 font-medium"> See more projects </span>
+                <span class="mr-3 font-medium"> See more on </span>
                 <fa-icon
                   [icon]="faGithub"
-                  size="3x"
-                  alt="Github B3llo"
-                ></fa-icon>
-              </a>
-            </div> -->
-          </span>
-
-          <span id="contact">
-            <h2
-              class="flex flex-col justify-between text-5xl dark:mb-0 font-poppins"
-            >
-              <span class="font-normal">
-                <span class="font-semibold">Contact</span>
-              </span>
-
-              <p id="contact" class="my-10 text-lg">
-                <span class="text-bold"> Here are some of my projects. </span>
-                <br />
-                I always have been fascinated for Pellentesque habitant morbi<br />
-                tristique senectus et netus et malesuada fames ac turpis
-                egestas.<br />
-                Suspendisse potenti. Donec in ultricies risus.
-                <br /><br />
-                Nulla tempus tempor metus nec maximus. Pellentesque habitant
-                morbi tristique senectus et<br />
-                netus et malesuada fames ac turpis egestas. Duis eu congue
-                massa. Curabitur aliquet convallis commodo.
-              </p>
-            </h2>
-
-            <div
-              class="flex items-center justify-between w-1/5 mx-auto mb-20 dark:mb-0"
-            >
-              <a href="https://github.com/B3llo/" target="_blank">
-                <fa-icon
-                  [icon]="faGithub"
-                  size="2x"
+                  size="lg"
                   alt="Github Logo"
                 ></fa-icon>
               </a>
-
-              <a
-                href="https://www.linkedin.com/in/gabriel-felipe-bello-075032208/"
-                target="_blank"
-              >
-                <fa-icon
-                  [icon]="faLinkedIn"
-                  size="2x"
-                  alt="LinkedIn Logo"
-                ></fa-icon>
-              </a>
-
-              <a
-                href="https://www.instagram.com/gabriel_b3llo/"
-                target="_blank"
-              >
-                <fa-icon
-                  [icon]="faInstagram"
-                  size="2x"
-                  alt="Instagram Logo"
-                ></fa-icon>
-              </a>
-
-              <a href="mailto:gfbello.x@gmail.com" target="_blank">
-                <fa-icon
-                  [icon]="faEnvelope"
-                  size="2x"
-                  alt="Email Logo"
-                ></fa-icon>
-              </a>
             </div>
+          </span>
+
+          <span id="contact">
+            <h2 class="justify-between text-5xl dark:mb-0 font-poppins">
+              <span class="col-span-2 font-normal">
+                <span class="font-semibold">Contact</span>
+              </span>
+            </h2>
+
+            <span class="grid grid-cols-3 mb-20 dark:mb-0">
+              <p id="contact" class="col-span-2 my-10 text-lg">
+                <span class="text-bold"> Get in touch</span>
+                <br />
+                Even though I&apos;m not currently looking for any new
+                opportunities, my inbox is always open. Whether you have a
+                question or just want to say hi, I&apos;ll try my best to get
+                back to you!
+              </p>
+
+              <div
+                class="flex items-center w-full col-span-1 mx-auto mb-0 justify-evenly"
+              >
+                <a href="https://github.com/B3llo/" target="_blank">
+                  <fa-icon
+                    [icon]="faGithub"
+                    size="2x"
+                    alt="Github Logo"
+                  ></fa-icon>
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/gabriel-felipe-bello-075032208/"
+                  target="_blank"
+                >
+                  <fa-icon
+                    [icon]="faLinkedIn"
+                    size="2x"
+                    alt="LinkedIn Logo"
+                  ></fa-icon>
+                </a>
+
+                <a
+                  href="https://www.instagram.com/gabriel_b3llo/"
+                  target="_blank"
+                >
+                  <fa-icon
+                    [icon]="faInstagram"
+                    size="2x"
+                    alt="Instagram Logo"
+                  ></fa-icon>
+                </a>
+
+                <a href="mailto:gfbello.x@gmail.com" target="_blank">
+                  <fa-icon
+                    [icon]="faEnvelope"
+                    size="2x"
+                    alt="Email Logo"
+                  ></fa-icon>
+                </a>
+              </div>
+            </span>
           </span>
         </div>
       </main>
 
       <div class="hidden w-full h-20 dark:block dark:bg-neutral-900"></div>
 
+      <div
+        class="fixed flex flex-col items-center justify-around m-3 bottom-4 left-4 h-1/5 dark:text-white"
+      >
+        <a href="https://github.com/B3llo/" target="_blank">
+          <fa-icon [icon]="faGithub" size="lg" alt="Github Logo"></fa-icon>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/gabriel-felipe-bello-075032208/"
+          target="_blank"
+        >
+          <fa-icon [icon]="faLinkedIn" size="lg" alt="LinkedIn Logo"></fa-icon>
+        </a>
+
+        <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank">
+          <fa-icon
+            [icon]="faInstagram"
+            size="lg"
+            alt="Instagram Logo"
+          ></fa-icon>
+        </a>
+
+        <a href="mailto:gfbello.x@gmail.com" target="_blank">
+          <fa-icon [icon]="faEnvelope" size="lg" alt="Email Logo"></fa-icon>
+        </a>
+      </div>
+
       <footer
         class="flex justify-center w-full p-3 dark:text-slate-200 dark:bg-neutral-900"
       >
-        <p class="text-sm">© 2022 Gabriel F. Bello. All rights reserved.</p>
+        <p class="text-sm">Designed & Built by Gabriel F. Bello</p>
       </footer>
     </div>
   </body>
