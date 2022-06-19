@@ -9,12 +9,65 @@
         [ngClass]="{ 'border-b': showNavbarBorder }"
         class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-700 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm dark:backdrop-blur-sm bg-neutral-50"
       >
-        <h1 class="mx-10 mt-4 text-3xl font-medium font-bodoni">
+        <h1 class="mx-auto text-3xl font-medium sm:mx-10 sm:mt-4 font-bodoni">
           <a href="#">Bello</a>
         </h1>
 
-        <nav class="w-1/4" id="nav">
-          <ul class="flex justify-between mt-4 mr-24">
+        <!-- <div class="mobile-menu">
+          <button
+            class="flex items-center justify-center text-3xl font-medium sm:hidden"
+            (click)="toggleNavbar()"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="mobile-menu-content">
+            <ul class="flex flex-col md:flex-row">
+              <li class="flex flex-col md:flex-row">
+                <a
+                  class="flex flex-col items-center justify-between md:flex-row"
+                  href="#"
+                >
+                  <span class="text-2xl font-medium">Home</span>
+                  <i class="fas fa-home"></i>
+                </a>
+              </li>
+
+              <li class="flex flex-col md:flex-row">
+                <a
+                  class="flex flex-col items-center justify-between md:flex-row"
+                  href="#"
+                >
+                  <span class="text-2xl font-medium">About</span>
+                  <i class="fas fa-info-circle"></i>
+                </a>
+              </li>
+
+              <li class="flex flex-col md:flex-row">
+                <a
+                  class="flex flex-col items-center justify-between md:flex-row"
+                  href="#"
+                >
+                  <span class="text-2xl font-medium">Contact</span>
+                  <i class="fas fa-phone"></i>
+                </a>
+              </li>
+
+              <li class="flex flex-col md:flex-row">
+                <a
+                  class="flex flex-col items-center justify-between md:flex-row"
+                  href="#"
+                >
+                  <span class="text-2xl font-medium">Blog</span>
+                  <i class="fas fa-blog"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+        <nav class="hidden sm:w-1/4 sm:block" id="nav">
+          <ul class="flex justify-between mt-1 mr-24 sm:mt-4">
             <li class="nav-item">
               <a href="#about">About</a>
               <span class=""></span>
