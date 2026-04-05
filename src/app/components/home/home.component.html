@@ -3,84 +3,23 @@
     dark: isDarkTheme
   }"
 >
-  <body class="">
-    <div class="scroll-smooth">
+  <body>
+    <div class="scroll-smooth dark:bg-neutral-900">
+      <!-- NAVBAR -->
       <header
         [ngClass]="{ 'border-b': showNavbarBorder }"
-        class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-700 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm dark:backdrop-blur-sm bg-neutral-50"
+        class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-700 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm bg-neutral-50"
       >
         <h1 class="mx-auto text-3xl font-medium sm:mx-10 sm:mt-4 font-bodoni">
           <a href="#">Bello</a>
         </h1>
 
-        <!-- <div class="mobile-menu">
-          <button
-            class="flex items-center justify-center text-3xl font-medium sm:hidden"
-            (click)="toggleNavbar()"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-
-          <div class="mobile-menu-content">
-            <ul class="flex flex-col md:flex-row">
-              <li class="flex flex-col md:flex-row">
-                <a
-                  class="flex flex-col items-center justify-between md:flex-row"
-                  href="#"
-                >
-                  <span class="text-2xl font-medium">Home</span>
-                  <i class="fas fa-home"></i>
-                </a>
-              </li>
-
-              <li class="flex flex-col md:flex-row">
-                <a
-                  class="flex flex-col items-center justify-between md:flex-row"
-                  href="#"
-                >
-                  <span class="text-2xl font-medium">About</span>
-                  <i class="fas fa-info-circle"></i>
-                </a>
-              </li>
-
-              <li class="flex flex-col md:flex-row">
-                <a
-                  class="flex flex-col items-center justify-between md:flex-row"
-                  href="#"
-                >
-                  <span class="text-2xl font-medium">Contact</span>
-                  <i class="fas fa-phone"></i>
-                </a>
-              </li>
-
-              <li class="flex flex-col md:flex-row">
-                <a
-                  class="flex flex-col items-center justify-between md:flex-row"
-                  href="#"
-                >
-                  <span class="text-2xl font-medium">Blog</span>
-                  <i class="fas fa-blog"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div> -->
-
-        <nav class="hidden sm:w-1/4 sm:block" id="nav">
-          <ul class="flex justify-between mt-1 mr-24 sm:mt-4">
-            <li class="nav-item">
-              <a href="#about">About</a>
-              <span class=""></span>
-            </li>
-            <li class="nav-item">
-              <a href="#projects">Projects</a>
-              <span class=""></span>
-            </li>
-            <li class="nav-item">
-              <a href="#contact">Contact</a>
-              <span class=""></span>
-            </li>
-
+        <nav class="hidden sm:block" id="nav">
+          <ul class="flex items-center gap-8 mt-1 mr-10 sm:mt-4">
+            <li class="nav-item"><a href="#about">About</a></li>
+            <li class="nav-item"><a href="#experience">Experience</a></li>
+            <li class="nav-item"><a href="#projects">Projects</a></li>
+            <li class="nav-item"><a href="#contact">Contact</a></li>
             <li
               class="flex items-center transition duration-300 ease-in-out cursor-pointer nav-item"
               (click)="toggleTheme()"
@@ -96,52 +35,47 @@
       </header>
 
       <main class="dark:bg-neutral-900 dark:text-slate-200">
+
+        <!-- HERO -->
         <div class="grid w-5/6 grid-cols-9 mx-auto font-medium sm:w-3/4">
           <span class="col-span-9 mt-16 sm:col-span-8 sm:mb-14 sm:mt-44">
-            <h2
-              class="flex flex-col justify-between my-8 text-5xl font-poppins"
-            >
+            <h2 class="flex flex-col justify-between my-8 text-5xl font-poppins">
               <span class="font-normal">
                 Hi, I&apos;m
                 <span class="font-semibold">Gabriel F. Bello</span>
               </span>
-
-              <span class=""></span>
+              <span class="mt-2 text-2xl font-light text-indigo-700 dark:text-cyan-400">
+                DevOps Engineer<span class="blink-cursor">|</span>
+              </span>
             </h2>
 
             <div class="flex flex-row">
               <p class="w-4/5 text-xl">
                 <span class="text-xl">
-                  Fullstack developer, student and runner. <br />
-                  Currently in college and loving to work with
+                  Cloud Operations Specialist at
+                  <span class="font-medium text-indigo-700 dark:text-cyan-500">Körber Supply Chain</span>.
+                  CKA certified.<br />
+                  Building and scaling infrastructure on
                 </span>
-                <span class="">
-                  <span class="font-medium text-blue-800 dark:text-cyan-500"
-                    >Angular</span
-                  >,
-                  <span class="font-medium text-blue-800 dark:text-cyan-500"
-                    >Node</span
-                  >
+                <span>
+                  <span class="font-medium text-indigo-700 dark:text-cyan-500">AWS</span>,
+                  <span class="font-medium text-indigo-700 dark:text-cyan-500">Kubernetes</span>
                   and
-                  <span class="font-medium text-blue-800 dark:text-cyan-500"
-                    >Docker</span
-                  >
+                  <span class="font-medium text-indigo-700 dark:text-cyan-500">Terraform</span>
                 </span>
-                <br />
-                <br />
-                <span class="opacity-85">
-                  Constantly studying and improving <br />
-                  to make better code, wonderful designs and having some fun.
+                <br /><br />
+                <span class="opacity-75 text-lg">
+                  5+ years of experience in cloud infrastructure,<br />
+                  CI/CD pipelines and platform engineering.
                 </span>
               </p>
             </div>
 
             <div class="flex flex-row my-8 justify-left">
               <button class="py-2 m-3 font-bold">
-                <a href="#about" class="">
-                  <span
-                    class="flex items-center justify-center font-medium btn-primary"
-                    >Know more
+                <a href="#about">
+                  <span class="flex items-center justify-center font-medium btn-primary">
+                    Know more
                     <mat-icon>chevron_right</mat-icon>
                   </span>
                 </a>
@@ -155,7 +89,6 @@
           >
             <div id="ripple"></div>
           </div>
-
           <div
             *ngIf="isDarkTheme"
             class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-white to-neutral-900 rounded-md mt-56 ripplePoint"
@@ -163,286 +96,173 @@
             <div id="rippleDark"></div>
           </div>
 
-          <span
-            class="justify-center w-2 col-span-1 my-16 align-top bg-indigo-700 rounded dark:bg-cyan-400 h-5/6"
-          ></span>
+          <!-- DIVIDER LINE -->
+          <span class="justify-center w-2 col-span-1 my-16 align-top bg-indigo-700 rounded dark:bg-cyan-400 h-5/6"></span>
 
-          <span class="col-span-8 sm:mt-16" id="about">
-            <h2
-              class="flex flex-col justify-between mt-8 text-5xl font-poppins"
-            >
+          <!-- ABOUT -->
+          <span class="col-span-8 sm:mt-16 fade-in-section" id="about">
+            <h2 class="flex flex-col justify-between mt-8 text-5xl font-poppins">
               <span class="font-normal">
-                <span class="font-semibold">About</span>
-                Me
+                <span class="font-semibold">About</span> Me
               </span>
 
-              <p class="my-10 text-lg">
-                <span class="text-bold">
-                  Hello! My name is Gabriel and I build things for the web.
-                </span>
-                <br />
-                I currently work as a DevOps Engineer and I am attending the
-                <br />
-                course of Analysis and Systems Development at Brazil. <br />
-
-                <br />
-
-                I started my history with programming with a language I was
-                curious about <br />
-                called
-                <span class="font-bold text-blue-800 dark:text-cyan-500"
-                  >C++</span
-                >. Afer that I started to learn about other technologies like
-                Javascript, Node and React.
-                <br />
-
-                <span class="font-bold text-blue-800 dark:text-cyan-500">
-                  Nowadays
-                </span>
-                I am more focused on the development of web applications and
-                also the development Cloud Platforms, usually using Docker and
-                Kubernetes.
+              <p class="my-10 text-lg leading-relaxed">
+                Hello! My name is Gabriel and I build infrastructure for the web.<br /><br />
+                I graduated in Analysis and Systems Development at
+                <span class="font-medium text-indigo-700 dark:text-cyan-500">UNIPAR (2023)</span>
+                and have been working in tech since 2021. My journey started with curiosity about
+                <span class="font-bold text-indigo-700 dark:text-cyan-500">C++</span>,
+                moved through web development with Node and Angular, and evolved into a deep passion
+                for cloud infrastructure and platform engineering.<br /><br />
+                <span class="font-medium text-indigo-700 dark:text-cyan-500">Nowadays</span>
+                I focus on cloud platforms, Kubernetes orchestration, Infrastructure as Code and
+                CI/CD working with companies like Wing Corp, EZOps, Trimble and Körber Supply Chain.
               </p>
             </h2>
           </span>
         </div>
 
-        <div class="">
+        <!-- TECHNOLOGIES -->
+        <div class="fade-in-section">
           <div class="flex w-4/5 mx-auto font-medium item-center sm:w-3/4">
-            <h2 class="flex flex-col mb-0 text-3xl sm:my-8 font-poppins">
-              <span class="font-semibold">Technologies</span>
-
-              <div class="flex flex-col w-2/5 px-10 mt-5 font-bold sm:flex-row">
-                <div class="flex flex-col items-start justify-center">
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >Node</span
-                      >
-                    </span>
-                  </span>
-
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >Docker</span
-                      >
-                    </span>
-                  </span>
-
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >Kubernetes</span
-                      >
-                    </span>
-                  </span>
-                </div>
-
-                <div class="flex flex-col items-start justify-center sm:mx-12">
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >Angular</span
-                      >
-                    </span>
-                  </span>
-
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >React</span
-                      >
-                    </span>
-                  </span>
-
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >Nest.js</span
-                      >
-                    </span>
-                  </span>
-                </div>
-
-                <div class="flex flex-col items-start justify-center">
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >Typescript</span
-                      >
-                    </span>
-                  </span>
-
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >MongoDB</span
-                      >
-                    </span>
-                  </span>
-
-                  <span class="flex flex-row items-center justify-center">
-                    <mat-icon>keyboard_arrow_right</mat-icon>
-
-                    <span class="text-xl">
-                      <span class="text-indigo-700 dark:text-cyan-500"
-                        >PostgreSQL</span
-                      >
-                    </span>
-                  </span>
+            <div class="w-full my-8">
+              <h2 class="mb-8 text-3xl font-semibold font-poppins">Technologies</h2>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div
+                  class="tech-group"
+                  *ngFor="let group of techGroups"
+                >
+                  <span class="tech-group-label">{{ group.label }}</span>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <span
+                      class="tech-badge"
+                      *ngFor="let item of group.items"
+                    >{{ item }}</span>
+                  </div>
                 </div>
               </div>
-            </h2>
+            </div>
           </div>
         </div>
 
-        <div class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4" id="projects">
-          <span>
-            <h2
-              class="flex flex-col justify-between mt-16 text-5xl sm:mt-32 font-poppins"
+        <!-- EXPERIENCE -->
+        <div class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4 fade-in-section" id="experience">
+          <h2 class="mt-16 mb-10 text-5xl font-poppins">
+            <span class="font-semibold">Experience</span>
+          </h2>
+
+          <div class="experience-timeline">
+            <div
+              class="experience-entry"
+              *ngFor="let exp of experiences"
             >
-              <span class="font-normal">
-                <span class="font-semibold">Projects</span>
-              </span>
-
-              <h2>
-                <span class="text-xl font-light">
-                  Here are some of my recent projects.
-                </span>
-              </h2>
-
-              <div class="grid gap-4 sm:grid-cols-3" id="repos">
-                <div
-                  class="flex flex-col justify-between row-span-1 mt-10 text-sm sm:col-span-1 repo-card"
-                  *ngFor="let project of projects"
-                >
-                  <div class="mb-4">
-                    <div class="mb-2 text-lg font-bold text-left">
-                      {{ project.name | repoName }}
-                    </div>
-                    <div>{{ project.description | emoji }}</div>
-                  </div>
-
-                  <mat-divider></mat-divider>
-
-                  <mat-chip-list aria-label="Topics" class="my-3">
-                    <mat-chip
-                      class="text-white bg-indigo-700 dark:bg-cyan-300 dark:text-black opacity-80 hover:opacity-100"
-                      color="primary"
-                      *ngFor="let topic of toArray(project.topics)"
-                    >
-                      {{ topic }}
-                    </mat-chip>
-                  </mat-chip-list>
-
-                  <mat-divider></mat-divider>
-
-                  <div class="flex flex-col justify-center max-w-sm mt-4">
-                    <button class="btn btn-primary">
-                      <a
-                        href="{{ project.html_url }}"
-                        target="_blank"
-                        class="flex flex-row items-center justify-center"
-                      >
-                        Go to project
-                        <mat-icon>arrow_right</mat-icon>
-                      </a>
-                    </button>
-                  </div>
+              <div class="experience-dot" [ngClass]="{ current: exp.current }"></div>
+              <div class="experience-content">
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+                  <span class="text-lg font-semibold">{{ exp.company }}</span>
+                  <span class="text-sm opacity-50 mt-1 sm:mt-0">{{ exp.period }}</span>
                 </div>
+                <span class="block text-sm font-medium text-indigo-700 dark:text-cyan-400 mb-2">{{ exp.role }}</span>
+                <p class="text-sm leading-relaxed opacity-75">{{ exp.summary }}</p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="w-4/5 mx-auto sm:w-3/4 fade-in-section mt-12">
+          <h2 class="mb-6 text-3xl font-semibold font-poppins">Certifications</h2>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div
+              class="cert-card"
+              *ngFor="let cert of certifications"
+            >
+              <span class="cert-badge">{{ cert.short }}</span>
+              <div class="ml-4">
+                <p class="text-sm font-semibold leading-tight">{{ cert.name }}</p>
+                <p class="text-xs opacity-50 mt-1">{{ cert.issuer }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4 fade-in-section" id="projects">
+          <span>
+            <h2 class="flex flex-col justify-between mt-16 text-5xl sm:mt-24 font-poppins">
+              <span class="font-semibold">Projects</span>
+              <span class="mt-2 text-xl font-light">Here are some of my recent projects.</span>
             </h2>
 
-            <div
-              class="flex items-center justify-center w-full p-4 mt-8 mb-16 sm:mb-32 dark:hover:text-white hover:text-neutral-900"
-            >
-              <a
-                href="https://github.com/B3llo/"
-                target="_blank"
-                class="flex items-center justify-center"
+            <div class="grid gap-4 mt-10 sm:grid-cols-3" id="repos">
+              <div
+                class="flex flex-col justify-between row-span-1 text-sm sm:col-span-1 repo-card"
+                *ngFor="let project of projects"
               >
-                <span class="mr-3 font-medium"> See more on </span>
-                <fa-icon
-                  [icon]="faGithub"
-                  size="lg"
-                  alt="Github Logo"
-                ></fa-icon>
+                <div class="mb-4">
+                  <div class="mb-2 text-lg font-bold text-left">{{ project.name }}</div>
+                  <div class="opacity-75 text-sm">{{ project.description }}</div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="flex flex-wrap gap-2 my-3">
+                  <span
+                    class="tech-badge"
+                    *ngFor="let topic of project.topics"
+                  >{{ topic }}</span>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="flex flex-col justify-center max-w-sm mt-4">
+                  <button class="btn btn-primary">
+                    <a
+                      href="{{ project.url }}"
+                      target="_blank"
+                      class="flex flex-row items-center justify-center"
+                    >
+                      Go to project
+                      <mat-icon>arrow_right</mat-icon>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-center w-full p-4 mt-8 mb-16 sm:mb-24 opacity-60 hover:opacity-100 transition-opacity duration-300">
+              <a href="https://github.com/B3llo/" target="_blank" class="flex items-center justify-center">
+                <span class="mr-3 font-medium">See more on</span>
+                <fa-icon [icon]="faGithub" size="lg" alt="Github Logo"></fa-icon>
               </a>
             </div>
           </span>
 
-          <span id="contact">
-            <h2 class="justify-between text-5xl dark:mb-0 font-poppins">
-              <span class="col-span-2 font-normal">
-                <span class="font-semibold">Contact</span>
-              </span>
+          <!-- CONTACT -->
+          <span id="contact" class="fade-in-section block">
+            <h2 class="text-5xl font-poppins">
+              <span class="font-semibold">Contact</span>
             </h2>
 
-            <span class="flex flex-col mb-20 sm:grid sm:grid-cols-3 dark:mb-0">
-              <p id="contact" class="col-span-2 my-10 text-lg">
-                <span> Get in Touch!</span>
-                <br />
-                My inbox is always open. Whether you have have a question or
-                want to share something, I&apos;ll try my best to get back to
-                you!
+            <span class="flex flex-col mb-20 sm:grid sm:grid-cols-3">
+              <p class="col-span-2 my-10 text-lg">
+                Get in touch!<br />
+                My inbox is always open. Whether you have a question or want to
+                collaborate, I&apos;ll try my best to get back to you.
               </p>
 
-              <div
-                class="flex items-center w-full col-span-1 mx-auto mb-0 justify-evenly"
-              >
-                <a href="https://github.com/B3llo/" target="_blank">
-                  <fa-icon
-                    [icon]="faGithub"
-                    size="2x"
-                    alt="Github Logo"
-                  ></fa-icon>
+              <div class="flex items-center w-full col-span-1 mx-auto mb-0 justify-evenly">
+                <a href="https://github.com/B3llo/" target="_blank" class="social-link">
+                  <fa-icon [icon]="faGithub" size="2x" alt="Github Logo"></fa-icon>
                 </a>
-
-                <a
-                  href="https://www.linkedin.com/in/gabriel-felipe-bello/"
-                  target="_blank"
-                >
-                  <fa-icon
-                    [icon]="faLinkedIn"
-                    size="2x"
-                    alt="LinkedIn Logo"
-                  ></fa-icon>
+                <a href="https://www.linkedin.com/in/gabriel-felipe-bello/" target="_blank" class="social-link">
+                  <fa-icon [icon]="faLinkedIn" size="2x" alt="LinkedIn Logo"></fa-icon>
                 </a>
-
-                <a
-                  href="https://www.instagram.com/gabriel_b3llo/"
-                  target="_blank"
-                >
-                  <fa-icon
-                    [icon]="faInstagram"
-                    size="2x"
-                    alt="Instagram Logo"
-                  ></fa-icon>
+                <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank" class="social-link">
+                  <fa-icon [icon]="faInstagram" size="2x" alt="Instagram Logo"></fa-icon>
                 </a>
-
-                <a href="mailto:gfbello.x@gmail.com" target="_blank">
-                  <fa-icon
-                    [icon]="faEnvelope"
-                    size="2x"
-                    alt="Email Logo"
-                  ></fa-icon>
+                <a href="mailto:gfbello.x@gmail.com" target="_blank" class="social-link">
+                  <fa-icon [icon]="faEnvelope" size="2x" alt="Email Logo"></fa-icon>
                 </a>
               </div>
             </span>
@@ -450,40 +270,23 @@
         </div>
       </main>
 
-      <div
-        class="hidden w-full h-20 border-none dark:block dark:bg-neutral-900"
-      ></div>
-
-      <div
-        class="fixed flex-col items-center justify-around hidden m-3 sm:flex bottom-4 left-4 h-1/5 dark:text-white"
-      >
-        <a href="https://github.com/B3llo/" target="_blank">
+      <!-- FIXED SIDEBAR SOCIAL -->
+      <div class="fixed flex-col items-center justify-around hidden m-3 sm:flex bottom-4 left-4 h-1/5 dark:text-white">
+        <a href="https://github.com/B3llo/" target="_blank" class="social-link">
           <fa-icon [icon]="faGithub" size="lg" alt="Github Logo"></fa-icon>
         </a>
-
-        <a
-          href="https://www.linkedin.com/in/gabriel-felipe-bello/"
-          target="_blank"
-        >
+        <a href="https://www.linkedin.com/in/gabriel-felipe-bello/" target="_blank" class="social-link">
           <fa-icon [icon]="faLinkedIn" size="lg" alt="LinkedIn Logo"></fa-icon>
         </a>
-
-        <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank">
-          <fa-icon
-            [icon]="faInstagram"
-            size="lg"
-            alt="Instagram Logo"
-          ></fa-icon>
+        <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank" class="social-link">
+          <fa-icon [icon]="faInstagram" size="lg" alt="Instagram Logo"></fa-icon>
         </a>
-
-        <a href="mailto:gfbello.x@gmail.com" target="_blank">
+        <a href="mailto:gfbello.x@gmail.com" target="_blank" class="social-link">
           <fa-icon [icon]="faEnvelope" size="lg" alt="Email Logo"></fa-icon>
         </a>
       </div>
 
-      <footer
-        class="flex justify-center w-full p-3 dark:text-slate-200 dark:bg-neutral-900"
-      >
+      <footer class="flex justify-center w-full p-3 dark:text-slate-200 dark:bg-neutral-900">
         <p class="text-sm">Designed & Built by Gabriel F. Bello</p>
       </footer>
     </div>

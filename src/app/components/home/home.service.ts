@@ -8,7 +8,7 @@ export class HomeService {
 
   public async getGithubData() {
     const response = await fetch(
-      'https://api.github.com/users/B3llo/repos?sort=created&per_page=3'
+      'https://api.github.com/users/B3llo/repos?sort=created&per_page=6'
     );
 
     const repos = await response.json();

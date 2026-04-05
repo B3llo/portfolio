@@ -16,8 +16,21 @@
   width: 7px;
 }
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(to top, blue, rgb(119, 0, 255));
+  border-radius: 6px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: rgb(23, 23, 23);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to top, rgb(34, 211, 238), rgb(6, 182, 212));
   border-radius: 6px;
 }
 
