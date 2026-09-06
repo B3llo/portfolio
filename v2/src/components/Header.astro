@@ -1,0 +1,84 @@
+---
+const LINKS = [
+  { href: "#about", label: "about" },
+  { href: "#stack", label: "stack" },
+  { href: "#career", label: "career" },
+  { href: "#work", label: "work" },
+  { href: "#contact", label: "contact" },
+];
+---
+
+<header
+  id="ops-header"
+  class="fixed top-0 z-50 w-full backdrop-blur-md transition"
+  style="background: color-mix(in srgb, var(--bg) 88%, transparent);"
+>
+  <div class="mx-auto flex h-14 max-w-4xl items-center justify-between px-4 sm:px-6">
+    <a href="#top" class="text-sm font-bold tracking-tight" aria-label="Back to top">
+      bello<span style="color: var(--acc);">@</span>prod:~$
+    </a>
+
+    <nav class="hidden items-center gap-4 md:flex" aria-label="Primary">
+      {
+        LINKS.map((l) => (
+          <a href={l.href} data-spy class="text-[13px]" style="color: var(--mut);">
+            ./{l.label}
+          </a>
+        ))
+      }
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle color theme"
+        class="border p-1.5 transition rule"
+        style="color: var(--mut);"
+      >
+        <svg class="theme-icon-sun hidden h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" />
+          <line x1="12" y1="2.5" x2="12" y2="4.5" /><line x1="12" y1="19.5" x2="12" y2="21.5" />
+          <line x1="4.9" y1="4.9" x2="6.3" y2="6.3" /><line x1="17.7" y1="17.7" x2="19.1" y2="19.1" />
+          <line x1="2.5" y1="12" x2="4.5" y2="12" /><line x1="19.5" y1="12" x2="21.5" y2="12" />
+          <line x1="4.9" y1="19.1" x2="6.3" y2="17.7" /><line x1="17.7" y1="6.3" x2="19.1" y2="4.9" />
+        </svg>
+        <svg class="theme-icon-moon h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+    </nav>
+
+    <div class="flex items-center gap-1 md:hidden">
+      <button
+        type="button"
+        aria-label="Toggle color theme"
+        class="border p-1.5 rule"
+        style="color: var(--mut);"
+        onclick="document.getElementById('theme-toggle')?.click()"
+      >
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <button
+        id="nav-toggle"
+        type="button"
+        aria-label="Open menu"
+        class="border p-1.5 text-[13px] rule"
+        style="color: var(--mut);"
+      >
+        menu
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" class="hidden border-t px-4 py-2 md:hidden rule" aria-label="Mobile">
+    <div class="flex flex-col">
+      {
+        LINKS.map((l) => (
+          <a href={l.href} class="border-b py-2.5 text-sm rule last:border-0" style="color: var(--mut);">
+            ./{l.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>

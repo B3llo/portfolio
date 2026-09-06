@@ -1,0 +1,76 @@
+---
+import { PROJECTS as FALLBACK_PROJECTS } from "../data/portfolio";
+
+interface Repo {
+  name: string;
+  description: string;
+  url: string;
+  topics: string[];
+  stars: number;
+}
+
+async function fetchLatestRepos(): Promise<Repo[]> {
+  const res = await fetch(
+    "https://api.github.com/users/B3llo/repos?type=public&sort=created&direction=desc&per_page=6",
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    }
+  );
+  if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
+  const data = await res.json();
+  return data.map((r: any) => ({
+    name: r.name,
+    description: r.description ?? "No description provided.",
+    url: r.html_url,
+    topics:
+      r.topics?.length > 0
+        ? r.topics.slice(0, 4)
+        : r.language
+          ? [r.language.toLowerCase()]
+          : [],
+    stars: r.stargazers_count ?? 0,
+  }));
+}
+
+let repos: Repo[];
+try {
+  repos = await fetchLatestRepos();
+} catch {
+  repos = FALLBACK_PROJECTS.map((p) => ({ ...p, stars: 0 }));
+}
+---
+
+<section id="work" aria-label="Projects" class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+  <p class="sec-label rv"><span class="n">04</span>gh repo list --limit 6</p>
+  <ol class="rv mt-4 border-t rule">
+    {
+      repos.map((p, i) => (
+        <li class="group border-b py-4 rule">
+          <a href={p.url} target="_blank" rel="noopener" aria-label={`${p.name} on GitHub`}>
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="text-[15px] font-bold group-hover:underline group-hover:underline-offset-4" style="text-decoration-color: var(--acc);">
+                <span class="font-code text-[13px]" style="color: var(--mut);">{String(i + 1).padStart(2, "0")}.</span>{" "}
+                {p.name}
+                <span class="ml-2 font-code text-xs font-normal" style="color: var(--mut);">★ {p.stars}</span>
+              </h3>
+              <span class="shrink-0 text-[13px] transition group-hover:translate-x-0.5" style="color: var(--acc);" aria-hidden="true">open ↗</span>
+            </div>
+            <p class="mt-1.5 max-w-prose text-[13.5px] leading-relaxed">{p.description}</p>
+            {p.topics.length > 0 && (
+              <p class="mt-1.5">
+                {p.topics.map((t) => <span class="tag">{t}</span>)}
+              </p>
+            )}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="rv mt-4 text-[13px]" style="color: var(--mut);">
+    live from <a href="https://github.com/B3llo/" target="_blank" rel="noopener" class="u-link">github.com/B3llo</a>
+    {" "}· refreshed on every deploy
+  </p>
+</section>

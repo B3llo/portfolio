@@ -1,0 +1,166 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e7e5e4" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gabriel F. Bello",
+        "jobTitle": "DevOps Engineer",
+        "worksFor": { "@type": "Organization", "name": "Infios" },
+        "knowsAbout": ["AWS", "Kubernetes", "Terraform", "CI/CD", "Docker", "Platform Engineering"],
+        "sameAs": [
+          "https://github.com/B3llo/",
+          "https://www.linkedin.com/in/gabriel-felipe-bello/",
+          "https://www.instagram.com/gabriel_b3llo/"
+        ]
+      }
+    </script>
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem("ops-theme");
+        const prefersDark =
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (stored === "dark" || (stored === null && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      } catch {}
+    </script>
+  </head>
+  <body class="antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <slot />
+    <script is:inline>
+      // reveal on scroll
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+
+      // scrollspy
+      const links = [...document.querySelectorAll("[data-spy]")];
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) =>
+                l.classList.toggle(
+                  "active",
+                  l.getAttribute("href") === "#" + e.target.id
+                )
+              );
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      ["about", "stack", "career", "work", "contact"].forEach((id) => {
+        const s = document.getElementById(id);
+        if (s) spy.observe(s);
+      });
+
+      // navbar border + back-to-top
+      const header = document.getElementById("ops-header");
+      const toTop = document.getElementById("to-top");
+      const onScroll = () => {
+        const y = window.scrollY > 24;
+        header?.classList.toggle("scrolled", y);
+        toTop?.classList.toggle("show", window.scrollY > 600);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      toTop?.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
+      // theme toggle (light default, dark opt-in)
+      const syncIcons = () => {
+        const dark = document.documentElement.classList.contains("dark");
+        document
+          .querySelectorAll(".theme-icon-sun")
+          .forEach((el) => el.classList.toggle("hidden", !dark));
+        document
+          .querySelectorAll(".theme-icon-moon")
+          .forEach((el) => el.classList.toggle("hidden", dark));
+      };
+      syncIcons();
+      document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        const dark = document.documentElement.classList.toggle("dark");
+        try {
+          localStorage.setItem("ops-theme", dark ? "dark" : "light");
+        } catch {}
+        syncIcons();
+      });
+
+      // mobile nav
+      document.getElementById("nav-toggle")?.addEventListener("click", () => {
+        document.getElementById("mobile-nav")?.classList.toggle("hidden");
+      });
+      document.querySelectorAll("#mobile-nav a").forEach((a) =>
+        a.addEventListener("click", () =>
+          document.getElementById("mobile-nav")?.classList.add("hidden")
+        )
+      );
+
+      // footer year
+      const yr = document.getElementById("year");
+      if (yr) yr.textContent = String(new Date().getFullYear());
+    </script>
+    <style is:inline>
+      #ops-header.scrolled {
+        border-bottom: 1px solid var(--line);
+      }
+      [data-spy].active {
+        color: var(--txt);
+      }
+      #to-top {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      #to-top.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+      }
+    </style>
+  </body>
+</html>

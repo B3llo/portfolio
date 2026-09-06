@@ -1,0 +1,32 @@
+---
+import { PROFILE } from "../data/portfolio";
+---
+
+<div class="mx-auto max-w-4xl px-4 pt-28 pb-12 sm:px-6 sm:pt-32">
+  <p class="rv text-[13px]" style="color: var(--mut);">
+    <span style="color: var(--acc);">$</span> whoami --verbose
+  </p>
+  <h1 class="rv mt-3 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+    {PROFILE.name}
+    <span class="cursor-block" aria-hidden="true"></span>
+  </h1>
+  <p class="rv mt-3 text-lg font-bold" style="color: var(--acc);">
+    &gt; {PROFILE.role}
+  </p>
+  <p class="rv mt-4 max-w-2xl text-[15px] leading-relaxed">
+    {PROFILE.title} at <strong>{PROFILE.employer}</strong>. CKA certified.
+    Building and scaling infrastructure on <strong>AWS</strong>,{" "}
+    <strong>Kubernetes</strong> and <strong>Terraform</strong>.
+  </p>
+
+  <p class="rv mt-5 border-y py-2.5 font-code text-[13px] rule" style="color: var(--mut);">
+    exp: 5y+ <span style="color: var(--acc);">|</span> certs: 3{" "}
+    <span style="color: var(--acc);">|</span> focus: aws, k8s, terraform{" "}
+    <span style="color: var(--acc);">|</span> status: <span style="color: var(--acc);">● operational</span>
+  </p>
+
+  <p class="rv mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold">
+    <a href="#work" class="tbtn tbtn-primary">view work</a>
+    <a href={`mailto:${PROFILE.email}`} class="tbtn">say hello</a>
+  </p>
+</div>

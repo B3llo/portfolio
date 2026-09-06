@@ -1,0 +1,10 @@
+---
+import { PROFILE } from "../data/portfolio";
+---
+
+<section id="about" aria-label="About me" class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+  <p class="sec-label rv"><span class="n">01</span>cat about.txt</p>
+  <div class="rv mt-4 max-w-prose space-y-4 text-[14.5px] leading-[1.8]">
+    {PROFILE.bio.map((p) => <p>{p}</p>)}
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import { PROFILE } from "../data/portfolio";
+import Socials from "./Socials.astro";
+---
+
+<section id="contact" aria-label="Contact" class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
+  <p class="sec-label rv"><span class="n">05</span>ping bello --open</p>
+  <h2 class="rv mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
+    My inbox is always open.
+  </h2>
+  <p class="rv mt-3 max-w-prose text-[14px] leading-relaxed">
+    Whether you have a question or want to collaborate, I&apos;ll try my
+    best to get back to you.
+  </p>
+  <p class="rv mt-4">
+    <a href={`mailto:${PROFILE.email}`} class="u-link text-[15px] font-bold">
+      {PROFILE.email}
+    </a>
+  </p>
+  <div class="rv mt-5">
+    <Socials />
+  </div>
+</section>

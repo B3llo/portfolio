@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Stack from "../components/Stack.astro";
+import Experience from "../components/Experience.astro";
+import Certs from "../components/Certs.astro";
+import Projects from "../components/Projects.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import BackToTop from "../components/BackToTop.astro";
+
+const title = "Gabriel F. Bello — DevOps Engineer | AWS, Kubernetes, Terraform";
+const description =
+  "Gabriel F. Bello, DevOps Engineer and Cloud Operations Specialist at Infios. CKA certified. Building and scaling infrastructure on AWS, Kubernetes and Terraform.";
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main id="main">
+    <div id="top">
+      <Hero />
+    </div>
+    <About />
+    <Stack />
+    <Experience />
+    <Certs />
+    <Projects />
+    <Contact />
+  </main>
+  <Footer />
+  <BackToTop />
+</Base>
