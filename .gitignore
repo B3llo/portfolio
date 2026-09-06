@@ -40,3 +40,11 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+graft/
+
+# agent-m3m temp caches
+.agent-m3m/sessions/
+.agent-m3m/.index/
+.agent-m3m/.store.lock

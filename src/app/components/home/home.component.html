@@ -1,67 +1,66 @@
-<html
-  [ngClass]="{
-    dark: isDarkTheme
-  }"
->
-  <body>
-    <div class="scroll-smooth dark:bg-neutral-900">
-      <!-- NAVBAR -->
-      <header
-        [ngClass]="{ 'border-b': showNavbarBorder }"
-        class="fixed top-0 z-50 flex flex-row justify-between w-screen p-3 align-middle bg-opacity-25 dark:border-slate-700 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm bg-neutral-50"
-      >
-        <h1 class="mx-auto text-3xl font-medium sm:mx-10 sm:mt-4 font-bodoni">
+<div class="scroll-smooth dark:bg-neutral-900">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <!-- NAVBAR -->
+  <header
+    [ngClass]="{ 'border-b': showNavbarBorder }"
+    class="fixed top-0 z-50 flex flex-row justify-between w-full p-3 align-middle bg-opacity-25 dark:border-slate-700 dark:text-white dark:bg-neutral-900 dark:bg-opacity-25 backdrop-blur-sm bg-neutral-50"
+  >
+        <p class="mx-auto text-3xl font-medium sm:mx-10 sm:mt-4 font-bodoni">
           <a href="#">Bello</a>
-        </h1>
+        </p>
 
-        <nav class="hidden sm:block" id="nav">
+        <nav class="hidden sm:block" id="nav" aria-label="Primary">
           <ul class="flex items-center gap-8 mt-1 mr-10 sm:mt-4">
             <li class="nav-item"><a href="#about">About</a></li>
             <li class="nav-item"><a href="#experience">Experience</a></li>
             <li class="nav-item"><a href="#projects">Projects</a></li>
             <li class="nav-item"><a href="#contact">Contact</a></li>
-            <li
-              class="flex items-center transition duration-300 ease-in-out cursor-pointer nav-item"
-              (click)="toggleTheme()"
-            >
-              <mat-icon
-                id="theme-toggle"
-                [ngClass]="{ 'rotate-180': isDarkTheme }"
-                >brightness_medium</mat-icon
+            <li class="flex items-center nav-item">
+              <button
+                type="button"
+                (click)="toggleTheme()"
+                aria-label="Toggle dark mode"
+                class="flex items-center transition duration-300 ease-in-out cursor-pointer"
               >
+                <fa-icon
+                  id="theme-toggle"
+                  [ngClass]="{ 'rotate-180': isDarkTheme }"
+                  [icon]="isDarkTheme ? faSun : faMoon"
+                ></fa-icon>
+              </button>
             </li>
           </ul>
         </nav>
       </header>
 
-      <main class="dark:bg-neutral-900 dark:text-slate-200">
+      <main id="main" class="dark:bg-neutral-900 dark:text-slate-200">
 
         <!-- HERO -->
         <div class="grid w-5/6 grid-cols-9 mx-auto font-medium sm:w-3/4">
           <span class="col-span-9 mt-16 sm:col-span-8 sm:mb-14 sm:mt-44">
-            <h2 class="flex flex-col justify-between my-8 text-5xl font-poppins">
+            <h1 class="flex flex-col justify-between my-8 text-5xl font-poppins">
               <span class="font-normal">
                 Hi, I&apos;m
                 <span class="font-semibold">Gabriel F. Bello</span>
               </span>
-              <span class="mt-2 text-2xl font-light text-indigo-700 dark:text-cyan-400">
-                DevOps Engineer<span class="blink-cursor">|</span>
+              <span class="flex items-center mt-2 text-2xl font-light font-mono prompt-line text-[rgb(var(--accent-rgb))]">
+                <span class="mr-2 opacity-60">&gt;</span>DevOps Engineer<span class="blink-cursor">_</span>
               </span>
-            </h2>
+            </h1>
 
             <div class="flex flex-row">
               <p class="w-4/5 text-xl">
                 <span class="text-xl">
                   Cloud Operations Specialist at
-                  <span class="font-medium text-indigo-700 dark:text-cyan-500">Körber Supply Chain</span>.
+                  <span class="font-medium text-[rgb(var(--accent-rgb))]">Infios</span>.
                   CKA certified.<br />
                   Building and scaling infrastructure on
                 </span>
                 <span>
-                  <span class="font-medium text-indigo-700 dark:text-cyan-500">AWS</span>,
-                  <span class="font-medium text-indigo-700 dark:text-cyan-500">Kubernetes</span>
+                  <span class="font-medium text-[rgb(var(--accent-rgb))]">AWS</span>,
+                  <span class="font-medium text-[rgb(var(--accent-rgb))]">Kubernetes</span>
                   and
-                  <span class="font-medium text-indigo-700 dark:text-cyan-500">Terraform</span>
+                  <span class="font-medium text-[rgb(var(--accent-rgb))]">Terraform</span>
                 </span>
                 <br /><br />
                 <span class="opacity-75 text-lg">
@@ -72,60 +71,59 @@
             </div>
 
             <div class="flex flex-row my-8 justify-left">
-              <button class="py-2 m-3 font-bold">
-                <a href="#about">
-                  <span class="flex items-center justify-center font-medium btn-primary">
-                    Know more
-                    <mat-icon>chevron_right</mat-icon>
-                  </span>
-                </a>
-              </button>
+              <a href="#about" class="py-2 m-3 font-bold">
+                <span class="flex items-center justify-center font-medium btn-primary">
+                  Know more
+                  <fa-icon [icon]="faChevronRight"></fa-icon>
+                </span>
+              </a>
+              <a href="#contact" class="py-2 m-3 font-bold">
+                <span class="flex items-center justify-center font-medium btn-ghost">
+                  Get in touch
+                </span>
+              </a>
             </div>
           </span>
 
           <div
-            *ngIf="!isDarkTheme"
-            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-slate-400 to-white rounded-md mt-56 ripplePoint"
+            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-slate-400 to-white dark:from-white dark:to-neutral-900 rounded-md mt-56 ripplePoint"
           >
             <div id="ripple"></div>
           </div>
-          <div
-            *ngIf="isDarkTheme"
-            class="flex justify-center w-0.5 col-span-1 align-top bg-gradient-to-b from-white to-neutral-900 rounded-md mt-56 ripplePoint"
-          >
-            <div id="rippleDark"></div>
-          </div>
 
           <!-- DIVIDER LINE -->
-          <span class="justify-center w-2 col-span-1 my-16 align-top bg-indigo-700 rounded dark:bg-cyan-400 h-5/6"></span>
+          <span class="justify-center w-2 col-span-1 my-16 align-top bg-[rgb(var(--accent-rgb))] rounded h-5/6"></span>
 
           <!-- ABOUT -->
-          <span class="col-span-8 sm:mt-16 fade-in-section" id="about">
-            <h2 class="flex flex-col justify-between mt-8 text-5xl font-poppins">
+          <section class="col-span-8 sm:mt-16 fade-in-section scroll-mt-24" id="about" appFadeIn aria-label="About me">
+            <p class="section-kicker">// about</p>
+            <h2 class="mt-2 text-5xl font-poppins">
               <span class="font-normal">
                 <span class="font-semibold">About</span> Me
               </span>
-
-              <p class="my-10 text-lg leading-relaxed">
-                Hello! My name is Gabriel and I build infrastructure for the web.<br /><br />
-                I graduated in Analysis and Systems Development at
-                <span class="font-medium text-indigo-700 dark:text-cyan-500">UNIPAR (2023)</span>
-                and have been working in tech since 2021. My journey started with curiosity about
-                <span class="font-bold text-indigo-700 dark:text-cyan-500">C++</span>,
-                moved through web development with Node and Angular, and evolved into a deep passion
-                for cloud infrastructure and platform engineering.<br /><br />
-                <span class="font-medium text-indigo-700 dark:text-cyan-500">Nowadays</span>
-                I focus on cloud platforms, Kubernetes orchestration, Infrastructure as Code and
-                CI/CD working with companies like Wing Corp, EZOps, Trimble and Körber Supply Chain.
-              </p>
             </h2>
-          </span>
+
+            <p class="my-10 text-lg leading-relaxed">
+              Hello! My name is Gabriel and I build infrastructure for the web.<br /><br />
+              I graduated in Analysis and Systems Development at
+              <span class="font-medium text-[rgb(var(--accent-rgb))]">UNIPAR (2023)</span>
+              and have been working in tech since 2021. My journey started with curiosity about
+              <span class="font-bold text-[rgb(var(--accent-rgb))]">C++</span>,
+              moved through web development with Node and Angular, and evolved into a deep passion
+              for cloud infrastructure and platform engineering.<br /><br />
+              <span class="font-medium text-[rgb(var(--accent-rgb))]">Nowadays</span>
+              I focus on cloud platforms, Kubernetes orchestration, Infrastructure as Code and
+              CI/CD, working with companies like Wing Corp, EZOps, Trimble and Infios — building
+              things that actually work, with AI tools like Claude Code and Codex woven into the process.
+            </p>
+          </section>
         </div>
 
         <!-- TECHNOLOGIES -->
-        <div class="fade-in-section">
+        <section class="fade-in-section" appFadeIn aria-label="Technologies">
           <div class="flex w-4/5 mx-auto font-medium item-center sm:w-3/4">
             <div class="w-full my-8">
+              <p class="section-kicker">// stack</p>
               <h2 class="mb-8 text-3xl font-semibold font-poppins">Technologies</h2>
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <div
@@ -143,11 +141,12 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- EXPERIENCE -->
-        <div class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4 fade-in-section" id="experience">
-          <h2 class="mt-16 mb-10 text-5xl font-poppins">
+        <section class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4 fade-in-section scroll-mt-24" id="experience" appFadeIn aria-label="Experience">
+          <p class="section-kicker">// career</p>
+          <h2 class="mt-2 mb-10 text-5xl font-poppins">
             <span class="font-semibold">Experience</span>
           </h2>
 
@@ -160,17 +159,18 @@
               <div class="experience-content">
                 <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                   <span class="text-lg font-semibold">{{ exp.company }}</span>
-                  <span class="text-sm opacity-50 mt-1 sm:mt-0">{{ exp.period }}</span>
+                  <span class="text-sm opacity-50 mt-1 sm:mt-0 experience-period">{{ exp.period }}</span>
                 </div>
-                <span class="block text-sm font-medium text-indigo-700 dark:text-cyan-400 mb-2">{{ exp.role }}</span>
+                <span class="block text-sm font-medium text-[rgb(var(--accent-rgb))] mb-2">{{ exp.role }}</span>
                 <p class="text-sm leading-relaxed opacity-75">{{ exp.summary }}</p>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- CERTIFICATIONS -->
-        <div class="w-4/5 mx-auto sm:w-3/4 fade-in-section mt-12">
+        <section class="w-4/5 mx-auto sm:w-3/4 fade-in-section mt-12" appFadeIn aria-label="Certifications">
+          <p class="section-kicker">// credentials</p>
           <h2 class="mb-6 text-3xl font-semibold font-poppins">Certifications</h2>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div
@@ -184,12 +184,13 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- PROJECTS -->
-        <div class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4 fade-in-section" id="projects">
+        <section class="w-4/5 mx-auto font-medium sm:mt-10 sm:w-3/4 fade-in-section scroll-mt-24" id="projects" appFadeIn aria-label="Projects">
           <span>
-            <h2 class="flex flex-col justify-between mt-16 text-5xl sm:mt-24 font-poppins">
+            <p class="section-kicker">// work</p>
+            <h2 class="flex flex-col justify-between mt-2 text-5xl sm:mt-4 font-poppins">
               <span class="font-semibold">Projects</span>
               <span class="mt-2 text-xl font-light">Here are some of my recent projects.</span>
             </h2>
@@ -204,7 +205,7 @@
                   <div class="opacity-75 text-sm">{{ project.description }}</div>
                 </div>
 
-                <mat-divider></mat-divider>
+                <div class="border-t border-black/10 dark:border-white/10" role="separator"></div>
 
                 <div class="flex flex-wrap gap-2 my-3">
                   <span
@@ -213,25 +214,24 @@
                   >{{ topic }}</span>
                 </div>
 
-                <mat-divider></mat-divider>
+                <div class="border-t border-black/10 dark:border-white/10" role="separator"></div>
 
                 <div class="flex flex-col justify-center max-w-sm mt-4">
-                  <button class="btn btn-primary">
-                    <a
-                      href="{{ project.url }}"
-                      target="_blank"
-                      class="flex flex-row items-center justify-center"
-                    >
-                      Go to project
-                      <mat-icon>arrow_right</mat-icon>
-                    </a>
-                  </button>
+                  <a
+                    href="{{ project.url }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-primary flex flex-row items-center justify-center"
+                  >
+                    Go to project
+                    <fa-icon [icon]="faArrowRight" class="ml-1"></fa-icon>
+                  </a>
                 </div>
               </div>
             </div>
 
             <div class="flex items-center justify-center w-full p-4 mt-8 mb-16 sm:mb-24 opacity-60 hover:opacity-100 transition-opacity duration-300">
-              <a href="https://github.com/B3llo/" target="_blank" class="flex items-center justify-center">
+              <a href="https://github.com/B3llo/" target="_blank" rel="noopener" class="flex items-center justify-center">
                 <span class="mr-3 font-medium">See more on</span>
                 <fa-icon [icon]="faGithub" size="lg" alt="Github Logo"></fa-icon>
               </a>
@@ -239,56 +239,74 @@
           </span>
 
           <!-- CONTACT -->
-          <span id="contact" class="fade-in-section block">
+          <section id="contact" class="fade-in-section block scroll-mt-24" appFadeIn aria-label="Contact">
+            <p class="section-kicker">// say-hello</p>
             <h2 class="text-5xl font-poppins">
               <span class="font-semibold">Contact</span>
             </h2>
 
             <span class="flex flex-col mb-20 sm:grid sm:grid-cols-3">
-              <p class="col-span-2 my-10 text-lg">
-                Get in touch!<br />
-                My inbox is always open. Whether you have a question or want to
-                collaborate, I&apos;ll try my best to get back to you.
-              </p>
+              <div class="col-span-2 my-10">
+                <p class="text-lg">
+                  Get in touch!<br />
+                  My inbox is always open. Whether you have a question or want to
+                  collaborate, I&apos;ll try my best to get back to you.
+                </p>
+                <a
+                  href="mailto:gfbello.x@gmail.com"
+                  class="btn btn-primary inline-flex items-center mt-6"
+                >
+                  Say hello
+                  <fa-icon [icon]="faEnvelope" class="ml-2"></fa-icon>
+                </a>
+              </div>
 
               <div class="flex items-center w-full col-span-1 mx-auto mb-0 justify-evenly">
-                <a href="https://github.com/B3llo/" target="_blank" class="social-link">
+                <a href="https://github.com/B3llo/" target="_blank" rel="noopener" class="social-link" aria-label="GitHub profile">
                   <fa-icon [icon]="faGithub" size="2x" alt="Github Logo"></fa-icon>
                 </a>
-                <a href="https://www.linkedin.com/in/gabriel-felipe-bello/" target="_blank" class="social-link">
+                <a href="https://www.linkedin.com/in/gabriel-felipe-bello/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn profile">
                   <fa-icon [icon]="faLinkedIn" size="2x" alt="LinkedIn Logo"></fa-icon>
                 </a>
-                <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank" class="social-link">
+                <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram profile">
                   <fa-icon [icon]="faInstagram" size="2x" alt="Instagram Logo"></fa-icon>
                 </a>
-                <a href="mailto:gfbello.x@gmail.com" target="_blank" class="social-link">
+                <a href="mailto:gfbello.x@gmail.com" target="_blank" rel="noopener" class="social-link" aria-label="Send email">
                   <fa-icon [icon]="faEnvelope" size="2x" alt="Email Logo"></fa-icon>
                 </a>
               </div>
             </span>
-          </span>
-        </div>
+          </section>
+        </section>
       </main>
 
       <!-- FIXED SIDEBAR SOCIAL -->
       <div class="fixed flex-col items-center justify-around hidden m-3 sm:flex bottom-4 left-4 h-1/5 dark:text-white">
-        <a href="https://github.com/B3llo/" target="_blank" class="social-link">
+        <a href="https://github.com/B3llo/" target="_blank" rel="noopener" class="social-link" aria-label="GitHub profile">
           <fa-icon [icon]="faGithub" size="lg" alt="Github Logo"></fa-icon>
         </a>
-        <a href="https://www.linkedin.com/in/gabriel-felipe-bello/" target="_blank" class="social-link">
+        <a href="https://www.linkedin.com/in/gabriel-felipe-bello/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn profile">
           <fa-icon [icon]="faLinkedIn" size="lg" alt="LinkedIn Logo"></fa-icon>
         </a>
-        <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank" class="social-link">
+        <a href="https://www.instagram.com/gabriel_b3llo/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram profile">
           <fa-icon [icon]="faInstagram" size="lg" alt="Instagram Logo"></fa-icon>
         </a>
-        <a href="mailto:gfbello.x@gmail.com" target="_blank" class="social-link">
+        <a href="mailto:gfbello.x@gmail.com" target="_blank" rel="noopener" class="social-link" aria-label="Send email">
           <fa-icon [icon]="faEnvelope" size="lg" alt="Email Logo"></fa-icon>
         </a>
       </div>
 
-      <footer class="flex justify-center w-full p-3 dark:text-slate-200 dark:bg-neutral-900">
-        <p class="text-sm">Designed & Built by Gabriel F. Bello</p>
-      </footer>
-    </div>
-  </body>
-</html>
+  <button
+    type="button"
+    *ngIf="showNavbarBorder"
+    (click)="scrollToTop()"
+    aria-label="Back to top"
+    class="fixed bottom-5 right-5 z-50 flex items-center justify-center w-11 h-11 rounded-full border border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-neutral-900 shadow-md opacity-80 hover:opacity-100 hover:-translate-y-0.5 transition"
+  >
+    <fa-icon [icon]="faArrowUp"></fa-icon>
+  </button>
+
+  <footer class="flex justify-center w-full p-3 border-t border-black/10 dark:border-white/10 dark:text-slate-200 dark:bg-neutral-900">
+    <p class="text-sm">Designed & Built by Gabriel F. Bello</p>
+  </footer>
+</div>
