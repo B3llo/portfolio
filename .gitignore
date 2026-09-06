@@ -9,6 +9,10 @@
 # Astro
 /.astro
 
+# Leftover v2 scaffold dir — only ignored build artifacts remain on disk
+# (safe to delete locally: v2/ was promoted to root in 8a4d2b4)
+v2/
+
 # Node
 /node_modules
 npm-debug.log
