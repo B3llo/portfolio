@@ -1,5 +1,5 @@
 ---
-// Original axonometric study. The three groups have independent scroll travel;
+// Original axonometric study. Five parts separate along staggered scroll intervals;
 // all faces share the same two projected axes, including vents and fasteners.
 const W = 220, D = 138;
 const px = (x: number, y: number) => 235 + x - .82 * y;
@@ -46,12 +46,17 @@ const screws = [[8,8],[W-8,8],[8,D-8],[W-8,D-8]];
         <g class="copper" fill="none">{Array.from({length:7},(_,i)=><path d={`M${15+i*4} 20v14l${26+i*2} ${26+i*2}h${27-i}l12 12v27`} />)}
           {Array.from({length:5},(_,i)=><path d={`M116 ${22+i*5}h${30-i*2}l20 20h25`} />)}
         </g>
-        <use href="#board-fan" x="66" y="65" />
+        <circle cx="66" cy="65" r="20" class="chip-face" />
         <rect x="108" y="57" width="36" height="34" rx="2" class="chip-face" />
         {[0,1,2,3,4,5].map(i=><path d={`M112 ${61+i*5}h28`} class="vent-line" />)}
-        {[0,1].map(i=><g><rect x="153" y={69+i*19} width="48" height="13" class="ram" />{[0,1,2,3].map(j=><rect x={158+j*10} y={72+i*19} width="7" height="6" class="port" />)}</g>)}
+        {[0,1].map(i=><rect x="153" y={72+i*19} width="48" height="6" class="port" />)}
         {screws.map(([x,y])=><circle cx={x} cy={y} r="3" class="screw" />)}
       </g>
+      <!-- Both modules ride the PCB until they lift from their sockets. -->
+      <g class="case-fan"><g transform={plane(16)}><use href="#board-fan" x="66" y="65" /></g></g>
+      <g class="case-memory"><g transform={plane(16)}>
+        {[0,1].map(i=><g><rect x="153" y={69+i*19} width="48" height="13" class="ram" />{[0,1,2,3].map(j=><rect x={158+j*10} y={72+i*19} width="7" height="6" class="port" />)}</g>)}
+      </g></g>
     </g>
     <g class="case-layer case-lid">
       <polygon points={front(0,14)} class="face-front" /><polygon points={side(0,14)} class="face-side" />

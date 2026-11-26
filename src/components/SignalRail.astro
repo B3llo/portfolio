@@ -35,6 +35,12 @@
       const last = stops[stops.length - 1];
       const hero = main.querySelector<HTMLElement>("[data-machining]");
       const heroStage = hero?.closest<HTMLElement>(".hero-stage");
+      const chassis = hero?.querySelector<HTMLElement>(".chassis");
+      // Overlap the five beats: no snapped frames or pauses between parts.
+      const beats = [
+        ["--lid", 0, .54], ["--fan", .19, .65], ["--memory", .34, .76],
+        ["--board", .49, .90], ["--base", .64, 1],
+      ] as const;
       const rows = Array.from(main.querySelectorAll<HTMLElement>("[data-motion-row]"), el => ({ el, y: 0 }));
       const careerReel = main.querySelector<HTMLElement>("[data-career-reel]");
       const jobs = rows.filter(({el}) => el.classList.contains("job"));
@@ -67,7 +73,7 @@
           nameDistance = Math.max(190, Math.min(box.height * .5, 275));
           // Finish opening just before sticky releases, leaving a glimpse of the board.
           const hold = stage.height - box.height;
-          caseDistance = hold > 0 ? hold * .78 : nameDistance;
+          caseDistance = hold > 0 ? hold * .90 : nameDistance;
         }
         for (const row of rows) row.y = top + row.el.getBoundingClientRect().top;
         endOfPage = Math.max(0, root.scrollHeight - height);
@@ -117,7 +123,12 @@
         const arrival = (top: number) => ((1 - finish) * ease((top - y - height * .45) / (height * .58))).toFixed(4);
         if (hero) {
           setValue(hero, "--open", ease((y - heroTop) / nameDistance).toFixed(4));
-          setValue(hero, "--case-open", ease((y - heroTop) / caseDistance).toFixed(4));
+        }
+        if (chassis) {
+          const progress = (y - heroTop) / caseDistance;
+          for (const [property, start, end] of beats) {
+            setValue(chassis, property, ease((progress - start) / (end - start)).toFixed(4));
+          }
         }
         for (const row of rows) setValue(row.el, "--arrival", arrival(row.y));
 
