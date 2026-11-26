@@ -1,44 +1,18 @@
-# Portfolio — AI Context
+# Portfolio — Project Context
 
 ## Stack
-- Astro 5 static site + Tailwind CSS 3, package manager `pnpm`
-- Zero client-side framework: one inline `<script>` in `src/layouts/Base.astro`
-  (reveal-on-scroll, scrollspy, navbar border, back-to-top, theme toggle, mobile nav, footer year)
-- Previous Angular v1 archived in `legacy-angular/` (tag `v1-angular-final`)
 
-## Files
-- `src/pages/index.astro` — composes all sections
-- `src/layouts/Base.astro` — head (SEO, fonts, JSON-LD, theme init), global inline JS/CSS
-- `src/components/Header.astro` — status bar (`bello@prod:~$`), scrollspy nav, theme toggle, mobile menu
-- `src/components/Hero.astro` — `h1` name, role prompt with block cursor, readout strip, `[view work]` / `[say hello]` bracket buttons
-- `src/components/About.astro`, `Stack.astro`, `Experience.astro`, `Certs.astro`, `Projects.astro`, `Contact.astro`, `Footer.astro`, `Socials.astro`, `BackToTop.astro`
-- `src/data/portfolio.ts` — profile, socials, tech groups, experiences, certifications, fallback projects
-- `src/styles/global.css` — Mono tokens, `.tbtn` bracket buttons, `.tag`, `.sec-label`, reveal, reduced-motion
-- `tailwind.config.mjs` — `font-mono: Space Mono`, `font-code: JetBrains Mono`
-- `public/favicon.svg` — stone square with green `>_`
+- Astro 5 static site, Tailwind CSS 3, and pnpm. No client-side UI framework.
+- `src/pages/index.astro` fetches the repository feed once for the terminal and project list, and composes the English-language homepage; keep the public section IDs stable (`work`, `career`, `certs`, `about`, `stack`, `contact`).
+- `src/layouts/Base.astro` owns metadata, person structured data, and early theme initialization. `src/components/Header.astro` owns the accessible theme toggle. Dark is the default; `ops-theme` persists a manual choice.
+- `src/styles/global.css` owns the visual tokens and responsive layout. Newsreader, IBM Plex Mono, and Space Grotesk are self-hosted. The optional terminal in About (`src/components/PortfolioTerminal.astro`) runs only a fixed set of portfolio commands. It clones predefined output markup and does not interpret commands as JavaScript or run an operating-system shell.
+- `src/data/portfolio.ts` owns profile, socials, technologies, experience, certifications, and fallback projects. Career outcomes sit next to the corresponding entries in the timeline. `src/data/project-notes.ts` adds editorial descriptions to matching repositories without changing the feed order.
+- `src/data/github.ts` fetches the six most recent public repos at build time, sorted by creation date. Unavailable or empty responses fall back to the local list; the section copy reflects the source.
+- `src/components/SignalRail.astro` connects the page headings to a shared scroll indicator and syncs the header’s active section. The content and navigation do not depend on the script; reduced motion disables continuous drawing.
+- The old Angular v1 is archived in `legacy-angular/` (tag `v1-angular-final`).
 
-## Design System (Mono)
-- **Fonts**: Space Mono (everything), JetBrains Mono (code/readouts)
-- **Light (default)**: stone `#E7E5E4` bg, `#57534E` body text (`#78716B` reserved for large/secondary — the spec token fails AA on body), neon `#37F712` highlights, blue `#0284C7` links
-- **Dark (opt-in `.dark`)**: terminal green-on-black `#0B0E0B`, links `#00A6F4`
-- Square corners, compact density, hairline rules, numbered `$` section labels
-
-## Projects (section 04)
-- `src/components/Projects.astro` fetches the 6 most recent public repos at **build time**
-  from `api.github.com/users/B3llo/repos` (`type=public&sort=created&direction=desc`),
-  falling back to the curated `portfolio.ts` list when the API fails or is rate-limited.
-- Topics fall back to the repo language; each row shows `★ stargazers_count`.
-
-## Sections (in order)
-1. Header — fixed status bar, scrollspy, theme toggle
-2. Hero — `whoami`, readout strip (`exp / certs / focus / status`)
-3. `01` About, `02` Stack (definition rows), `03` Career (`git log` rows), Certs, `04` Work, `05` Contact
-4. Footer — colophon (typefaces, Astro), dynamic year
-
-## Owner Info (from resume)
-- **Name**: Gabriel Felipe Bello
-- **Role**: DevOps Engineer / Cloud Operations Development Specialist
-- **Current employer**: Infios, formerly Körber Supply Chain (Mar 2024 – present)
-- **Skills**: AWS, Azure, GCP, OCI, Kubernetes, Terraform, Docker, Ansible, CI/CD, TypeScript, Bash
-- **Certs**: CKA (Linux Foundation), AWS Developer Associate, AWS Cloud Practitioner
-- **GitHub**: B3llo | **LinkedIn**: gabriel-felipe-bello | **Email**: gfbello.x@gmail.com
+```bash
+pnpm install --frozen-lockfile
+pnpm dev
+pnpm build
+```

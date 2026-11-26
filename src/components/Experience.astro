@@ -1,28 +1,46 @@
 ---
 import { EXPERIENCE } from "../data/portfolio";
+import Certs from "./Certs.astro";
+const careerYears = EXPERIENCE.map(({ period, company }) => ({
+  year: period.match(/\d{4}/)?.[0] ?? "", company,
+}));
 ---
 
-<section id="career" aria-label="Experience" class="mx-auto max-w-4xl px-4 py-10 sm:px-6">
-  <p class="sec-label rv"><span class="n">03</span>git log --career --oneline</p>
-  <p class="rv mt-3 max-w-prose text-[13.5px]" style="color: var(--mut);">
-    Five years across platform and infrastructure teams, from Jr. DevOps to Cloud Operations Development Specialist.
-  </p>
-  <ol class="rv mt-4 border-t rule">
-    {
-      EXPERIENCE.map((e) => (
-        <li class="border-b py-4 rule">
-          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 class="text-[15px] font-bold">
-              <span style="color: var(--acc);">*</span> {e.company}
-            </h3>
-            <span class="font-code text-xs" style="color: var(--mut);">[{e.period}]</span>
-          </div>
-          <p class="mt-1 text-[13px]" style="color: var(--acc);">
-            {e.role}{e.current ? " [current]" : ""}
+<section id="career" class="shell section career" aria-labelledby="career-title">
+  <div class="career-record">
+  <div class="section-heading career-intro">
+    <div>
+      <h2 id="career-title" data-signal-heading><span class="signal-label">Experience</span></h2>
+      <p>Cloud operations and platform engineering since 2021.</p>
+      <div class="year-reel" aria-hidden="true" data-career-reel>
+        <span class="reel-label">Joined</span>
+        <div class="reel-window"><div class="reel-tape">
+          {careerYears.map(({year}) => <span>{year}</span>)}
+        </div></div>
+        <div class="reel-employer"><div class="reel-tape">
+          {careerYears.map(({company}) => <span>{company}</span>)}
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <ol class="timeline" role="list">
+    {EXPERIENCE.map((job) => (
+      <li id={`job-${job.id}`} tabindex="-1" data-motion-row class:list={["job", { current: job.current }]}>
+        <p class="job-period">{job.period}</p>
+        <div class="job-description">
+          <h3>{job.company}{job.formerName && <span class="former-name"> (formerly {job.formerName})</span>}</h3>
+          <p class="job-role">{job.role}</p>
+          <p class="job-summary">{job.summary}</p>
+        </div>
+        {job.outcome && (
+          <p class="job-outcome">
+            <strong>{job.outcome.qualifier && `${job.outcome.qualifier} `}{job.outcome.value}</strong>
+            <span>{job.outcome.label}</span>
           </p>
-          <p class="mt-2 max-w-prose text-[13.5px] leading-relaxed">{e.summary}</p>
-        </li>
-      ))
-    }
+        )}
+      </li>
+    ))}
   </ol>
+  </div>
+  <Certs />
 </section>

@@ -1,0 +1,112 @@
+---
+import { PROFILE, type Project } from "../data/portfolio";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const profileHref = "#about";
+---
+
+<details id="portfolio-terminal" class="terminal-disclosure" hidden>
+  <summary><span aria-hidden="true">&gt;_</span> Open portfolio terminal</summary>
+  <div class="terminal">
+    <form class="terminal-form" aria-label="Portfolio shell" action="#">
+      <label for="terminal-command"><span aria-hidden="true">$</span><span class="sr-only">Portfolio command</span></label>
+      <input
+        id="terminal-command"
+        type="text"
+        placeholder="Type a command"
+        aria-describedby="terminal-help"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        maxlength="64"
+      />
+      <button type="submit">Run<span aria-hidden="true"> ↵</span></button>
+    </form>
+    <div id="terminal-help" class="terminal-help">
+      <span>Try <button type="button" data-terminal-command="help">help</button> or <button type="button" data-terminal-command="ls projects">ls projects</button>.</span>
+      <span class="terminal-scope">Runs portfolio commands only.</span>
+    </div>
+    <div class="terminal-output" aria-live="polite" aria-atomic="true"></div>
+
+    <div hidden data-output="help">
+      <dl class="terminal-commands">
+        <div><dt>help</dt><dd>Show available commands</dd></div>
+        <div><dt>whoami</dt><dd>Show Gabriel’s profile</dd></div>
+        <div><dt>ls</dt><dd>List portfolio sections</dd></div>
+        <div><dt>ls projects</dt><dd>List public repositories</dd></div>
+        <div><dt>cat contact</dt><dd>Show contact information</dd></div>
+        <div><dt>clear</dt><dd>Clear command output</dd></div>
+      </dl>
+    </div>
+    <div hidden data-output="whoami">
+      <p>{PROFILE.name} — {PROFILE.role} at {PROFILE.employer}. <a href={profileHref}>Read my bio</a>.</p>
+    </div>
+    <div hidden data-output="ls">
+      <ul class="terminal-links" role="list">
+        <li><a href="#work">projects/</a></li>
+        <li><a href="#career">experience/</a></li>
+        <li><a href={profileHref}>about/</a></li>
+        <li><a href="#stack">stack/</a></li>
+        <li><a href="#contact">contact/</a></li>
+      </ul>
+    </div>
+    <div hidden data-output="ls projects">
+      <ul class="terminal-links" aria-label="Public repositories" role="list">
+        {projects.map(({ name, url }) => <li><a href={url}>{name}</a></li>)}
+      </ul>
+    </div>
+    <div hidden data-output="cat contact">
+      <p>Email: <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p>
+    </div>
+  </div>
+</details>
+
+<script>
+  const terminal = document.querySelector<HTMLElement>("#portfolio-terminal");
+  const form = terminal?.querySelector("form");
+  const input = terminal?.querySelector("input");
+  const output = terminal?.querySelector<HTMLElement>(".terminal-output");
+
+  if (terminal && form && input && output) {
+    const commands = new Map(
+      Array.from(terminal.querySelectorAll<HTMLElement>("[data-output]"), (template) =>
+        [template.dataset.output, template] as const,
+      ),
+    );
+
+    const run = (command: string) => {
+      const result = command.trim().replace(/\s+/g, " ").toLowerCase();
+      if (!result) return;
+      if (result === "clear") {
+        const notice = document.createElement("span");
+        notice.className = "sr-only";
+        notice.textContent = "Output cleared.";
+        output.replaceChildren(notice);
+        return;
+      }
+
+      const line = document.createElement("p");
+      line.className = "terminal-echo";
+      line.textContent = `$ ${command.trim()}`;
+      const response = commands.get(result);
+      const message = document.createElement("p");
+      message.textContent = "Command not found. Type help for the available commands.";
+      const nodes = response ? Array.from(response.childNodes, (node) => node.cloneNode(true)) : [message];
+      output.replaceChildren(line, ...nodes);
+    };
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      run(input.value);
+      input.value = "";
+    });
+    terminal.querySelectorAll<HTMLButtonElement>("[data-terminal-command]").forEach((button) => {
+      button.addEventListener("click", () => run(button.dataset.terminalCommand ?? ""));
+    });
+    terminal.hidden = false;
+  }
+</script>

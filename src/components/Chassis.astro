@@ -1,0 +1,70 @@
+---
+// Original axonometric study. The three groups have independent scroll travel;
+// all faces share the same two projected axes, including vents and fasteners.
+const W = 220, D = 138;
+const px = (x: number, y: number) => 235 + x - .82 * y;
+const py = (x: number, y: number) => 122 + .39 * x + .48 * y;
+const point = (x: number, y: number, z: number) => `${px(x,y)},${py(x,y) + z}`;
+const plane = (z: number) => `matrix(1 .39 -.82 .48 235 ${122 + z})`;
+const front = (z: number, h: number) => [point(0,D,z),point(W,D,z),point(W,D,z+h),point(0,D,z+h)].join(' ');
+const side = (z: number, h: number) => [point(W,0,z),point(W,D,z),point(W,D,z+h),point(W,0,z+h)].join(' ');
+const screws = [[8,8],[W-8,8],[8,D-8],[W-8,D-8]];
+---
+
+<figure class="chassis" aria-label="Server chassis illustration, from enclosure to circuit board">
+  <svg class="chassis-art" viewBox="48 10 475 391" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="vent-slots" width="7" height="9" patternUnits="userSpaceOnUse"><path d="M1 1h3v5H1z" class="vent-hole" /></pattern>
+      <g id="board-fan">
+        <rect x="-23" y="-23" width="46" height="46" rx="4" class="chip-face" />
+        <circle r="19" class="fan-ring" />
+        {Array.from({length:7},(_,i)=><path d="M2 -4Q1 -15 12 -14Q18 -10 16 -6Q8 -9 5 0Z" transform={`rotate(${i*360/7})`} class="fan-blade" />)}
+        <circle r="5" class="chip-face" />
+      </g>
+    </defs>
+    <g fill="none" class="draft-grid" transform={plane(71)}>
+      {Array.from({length:10},(_,i)=><path d={`M${i*34-32} -33v224`} />)}
+      {Array.from({length:7},(_,i)=><path d={`M-32 ${i*34-30}h307`} />)}
+    </g>
+    <g class="case-guides" fill="none" stroke-dasharray="4 6">
+      {screws.map(([x,y])=><path d={`M${point(x,y,-94)}L${point(x,y,72)}`} />)}
+    </g>
+    <g class="case-layer case-base">
+      <polygon points={front(29,27)} class="face-front" /><polygon points={side(29,27)} class="face-side" />
+      <g transform={plane(29)}><rect width={W} height={D} class="metal" /><rect x="8" y="8" width={W-16} height={D-16} class="chip-face" />
+        {screws.map(([x,y])=><circle cx={x} cy={y} r="4" class="screw" />)}
+      </g>
+      <g transform={`matrix(1 .39 0 1 ${px(0,D)} ${py(0,D)+29})`}>
+        {[12,52,92].map(x=><rect x={x} y="6" width="32" height="12" rx="2" class="port" />)}
+        {[154,162,170,178,186,194,202].map(x=><path d={`M${x} 7v12`} class="vent-line" />)}
+      </g>
+    </g>
+    <g class="case-layer case-board">
+      <polygon points={front(16,4)} class="pcb-edge" /><polygon points={side(16,4)} class="pcb-edge" />
+      <g transform={plane(16)}>
+        <rect width={W} height={D} rx="2" class="pcb" />
+        <g class="copper" fill="none">{Array.from({length:7},(_,i)=><path d={`M${15+i*4} 20v14l${26+i*2} ${26+i*2}h${27-i}l12 12v27`} />)}
+          {Array.from({length:5},(_,i)=><path d={`M116 ${22+i*5}h${30-i*2}l20 20h25`} />)}
+        </g>
+        <use href="#board-fan" x="66" y="65" />
+        <rect x="108" y="57" width="36" height="34" rx="2" class="chip-face" />
+        {[0,1,2,3,4,5].map(i=><path d={`M112 ${61+i*5}h28`} class="vent-line" />)}
+        {[0,1].map(i=><g><rect x="153" y={69+i*19} width="48" height="13" class="ram" />{[0,1,2,3].map(j=><rect x={158+j*10} y={72+i*19} width="7" height="6" class="port" />)}</g>)}
+        {screws.map(([x,y])=><circle cx={x} cy={y} r="3" class="screw" />)}
+      </g>
+    </g>
+    <g class="case-layer case-lid">
+      <polygon points={front(0,14)} class="face-front" /><polygon points={side(0,14)} class="face-side" />
+      <g transform={plane(0)}>
+        <rect width={W} height={D} class="metal lid-metal" />
+        <rect x="18" y="17" width="90" height="90" fill="url(#vent-slots)" />
+        <path d="M127 19h70m-70 6h70m-70 6h51" class="etch" />
+        <text x="136" y="109" class="lid-name">B3LLO</text>
+        {screws.map(([x,y])=><g><circle cx={x} cy={y} r="3" class="screw" /><path d={`m${x-1.6} ${y}h3.2`} class="etch" /></g>)}
+      </g>
+      <g transform={`matrix(1 .39 0 1 ${px(0,D)} ${py(0,D)})`}>
+        <path d="M11 7h44" class="power-line" /><circle cx="201" cy="7" r="2" class="power-led" />
+      </g>
+    </g>
+  </svg>
+</figure>

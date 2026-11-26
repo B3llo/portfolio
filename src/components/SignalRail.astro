@@ -1,0 +1,196 @@
+<div class="signal-rail" aria-hidden="true" data-signal-rail hidden>
+  <div class="signal-rail-fill"></div>
+  <span class="signal-head"></span>
+</div>
+
+<script>
+  const main = document.querySelector<HTMLElement>("#main");
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const rail = document.querySelector<HTMLElement>("[data-signal-rail]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const clamp = (n: number) => Math.max(0, Math.min(1, n));
+
+  // Zero velocity at both ends of a scroll interval (also when scrolling back).
+  const ease = (n: number) => {
+    const t = clamp(n);
+    return t * t * (3 - 2 * t);
+  };
+  const setValue = (el: HTMLElement, name: string, value: string) => {
+    if (el.style.getPropertyValue(name) !== value) el.style.setProperty(name, value);
+  };
+
+  if (main && header && rail) {
+    const nav = new Map(Array.from(header.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]'), (link) => [link.hash.slice(1), link]));
+    const stops = Array.from(main.querySelectorAll<HTMLElement>("[data-signal-heading]"), (heading) => {
+      const node = document.createElement("span");
+      node.className = "signal-node";
+      rail.append(node);
+      const section = heading.closest("section");
+      return { heading, node, link: nav.get(section?.id ?? ""), y: 0 };
+    });
+
+    if (stops.length >= 2) {
+      const root = document.documentElement;
+      const first = stops[0];
+      const last = stops[stops.length - 1];
+      const hero = main.querySelector<HTMLElement>("[data-machining]");
+      const heroStage = hero?.closest<HTMLElement>(".hero-stage");
+      const rows = Array.from(main.querySelectorAll<HTMLElement>("[data-motion-row]"), el => ({ el, y: 0 }));
+      const careerReel = main.querySelector<HTMLElement>("[data-career-reel]");
+      const jobs = rows.filter(({el}) => el.classList.contains("job"));
+      const yearChanges = jobs.slice(1);
+      let heroTop = 0;
+      let nameDistance = 240;
+      let caseDistance = 120;
+      let headerHeight = 0;
+      let endOfPage = 0;
+      let range = 1;
+      let height = window.innerHeight;
+      let active = -1;
+      let visualY = NaN;
+      let lastTarget = NaN;
+      let lastFrame: number | undefined;
+      let frame = 0;
+      let measurePending = true;
+
+      const measure = () => {
+        const top = window.scrollY;
+        const mainTop = main.getBoundingClientRect().top + top;
+        height = window.innerHeight;
+        headerHeight = header.getBoundingClientRect().height;
+        let heroDrift = 0;
+        if (hero && heroStage) {
+          const box = hero.getBoundingClientRect();
+          const stage = heroStage.getBoundingClientRect();
+          heroTop = top + stage.top - headerHeight;
+          heroDrift = box.top - stage.top;
+          nameDistance = Math.max(190, Math.min(box.height * .5, 275));
+          // Finish opening just before sticky releases, leaving a glimpse of the board.
+          const hold = stage.height - box.height;
+          caseDistance = hold > 0 ? hold * .78 : nameDistance;
+        }
+        for (const row of rows) row.y = top + row.el.getBoundingClientRect().top;
+        endOfPage = Math.max(0, root.scrollHeight - height);
+        for (const stop of stops) {
+          const bounds = stop.heading.getBoundingClientRect();
+          // The Projects intro sticks during this chapter. Measure its original flow
+          // position, not its current pinned position (also when reloading mid-page).
+          const sticky = stop.heading.closest<HTMLElement>(".projects-intro, .career-intro");
+          const section = sticky?.closest("section");
+          const naturalTop = sticky && section && getComputedStyle(sticky).position === "sticky"
+            ? section.getBoundingClientRect().top + parseFloat(getComputedStyle(section).paddingTop) + 1
+            : bounds.top - (stop === first ? heroDrift : 0);
+          stop.y = top + naturalTop + Math.min(bounds.height * .42, 30);
+        }
+        range = Math.max(1, last.y - first.y);
+        root.style.setProperty("--site-header-height", `${headerHeight}px`);
+        rail.style.insetBlockStart = `${first.y - mainTop}px`;
+        rail.style.blockSize = `${range}px`;
+        rail.style.setProperty("--rail-length", `${range}px`);
+        for (const stop of stops) stop.node.style.insetBlockStart = `${100 * (stop.y - first.y) / range}%`;
+      };
+
+      const updateSection = (cursor: number, atEnd: boolean) => {
+        let next = 0;
+        for (let i = 1; i < stops.length; i++) {
+          if (cursor >= stops[i].y || atEnd) next = i;
+        }
+
+        if (next !== active) {
+          const previous = stops[active];
+          previous?.heading.removeAttribute("data-signal-active");
+          previous?.node.removeAttribute("data-signal-active");
+          previous?.link?.removeAttribute("aria-current");
+          const current = stops[next];
+          current.heading.setAttribute("data-signal-active", "");
+          current.node.setAttribute("data-signal-active", "");
+          current.link?.setAttribute("aria-current", "location");
+          active = next;
+        }
+      };
+
+      const draw = (y: number) => {
+        const cursor = y + headerHeight + Math.min(155, height * .2);
+        // Short last sections may never reach the reading line. Ease into their
+        // resting pose over the final stretch instead of snapping on the last pixel.
+        const finish = endOfPage > 0 ? ease(1 - (endOfPage - y) / (height * .32)) : 0;
+        const arrival = (top: number) => ((1 - finish) * ease((top - y - height * .45) / (height * .58))).toFixed(4);
+        if (hero) {
+          setValue(hero, "--open", ease((y - heroTop) / nameDistance).toFixed(4));
+          setValue(hero, "--case-open", ease((y - heroTop) / caseDistance).toFixed(4));
+        }
+        for (const row of rows) setValue(row.el, "--arrival", arrival(row.y));
+
+        if (careerReel && jobs.length) {
+          const readingLine = y + headerHeight + height * .32;
+          const span = Math.min(210, height * .23);
+          const position = yearChanges.reduce((sum, job) => sum + ease(.5 + (readingLine - job.y) / span), 0);
+          setValue(careerReel, "--tape-y", `${(-100 * position / jobs.length).toFixed(4)}%`);
+        }
+        const progress = clamp((cursor - first.y) / range);
+        const fill = (progress + (1 - progress) * finish).toFixed(5);
+        // Scope the hot variables: changing the rail shouldn't invalidate the article.
+        setValue(rail, "--signal-progress", fill);
+        setValue(header, "--signal-progress", fill);
+        for (const stop of stops) {
+          const sweep = ease((cursor - stop.y + 118) / 190);
+          setValue(stop.heading, "--signal-draw", (sweep + (1 - sweep) * finish).toFixed(4));
+          setValue(stop.heading, "--arrival", arrival(stop.y));
+        }
+      };
+
+      const update = (time: number) => {
+        frame = 0;
+        if (measurePending) {
+          measurePending = false;
+          measure();
+        }
+        const target = Math.min(endOfPage, Math.max(0, window.scrollY));
+        updateSection(target + headerHeight + Math.min(155, height * .2), endOfPage > 0 && target >= endOfPage - 3);
+        if (reducedMotion.matches) return;
+
+        // Only the artwork follows this short filter; native scrolling, anchors
+        // and aria-current use the actual position. Time-based at 60 or 120 Hz.
+        // Restored pages and long jumps start at the destination, not chapters ago.
+        if (!Number.isFinite(visualY) || Math.abs(target - lastTarget) > height * .8) visualY = target;
+        const dt = lastFrame === undefined ? 1000 / 60 : Math.max(0, time - lastFrame);
+        visualY += (target - visualY) * -Math.expm1(-dt / 55);
+        lastTarget = target;
+        const moving = Math.abs(target - visualY) > .15;
+        if (!moving) visualY = target;
+        draw(visualY);
+        lastFrame = moving ? time : undefined;
+        if (moving) schedule();
+      };
+
+      const schedule = () => {
+        if (!frame) frame = requestAnimationFrame(update);
+      };
+      const scheduleMeasure = () => {
+        measurePending = true;
+        schedule();
+      };
+
+      const restore = () => {
+        visualY = NaN;
+        lastFrame = undefined;
+        scheduleMeasure();
+      };
+
+      rail.hidden = false;
+      root.setAttribute("data-signal-ready", "");
+      root.setAttribute("data-motion-ready", "");
+      window.addEventListener("scroll", schedule, { passive: true });
+      window.addEventListener("resize", scheduleMeasure, { passive: true });
+      window.addEventListener("pageshow", restore);
+      reducedMotion.addEventListener("change", restore);
+      if ("ResizeObserver" in window) {
+        const observer = new ResizeObserver(scheduleMeasure);
+        observer.observe(main);
+        observer.observe(header);
+      }
+      document.fonts?.ready.then(scheduleMeasure);
+      schedule();
+    }
+  }
+</script>

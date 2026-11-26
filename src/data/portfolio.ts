@@ -4,13 +4,11 @@ export const PROFILE = {
   role: "DevOps Engineer",
   title: "Cloud Operations Development Specialist",
   employer: "Infios",
-  formerEmployer: "Körber Supply Chain",
   location: "Brazil",
   email: "gfbello.x@gmail.com",
   bio: [
-    "Hello! I'm Gabriel and I build infrastructure for the web.",
-    "I graduated in Analysis and Systems Development at UNIPAR (2023) and have been working in tech since 2021. My journey started with curiosity about C++, moved through web development with Node and Angular, and evolved into a deep passion for cloud infrastructure and platform engineering.",
-    "Nowadays I focus on cloud platforms, Kubernetes orchestration, Infrastructure as Code and CI/CD — building things that actually work, with AI tools like Claude Code and Codex woven into the process.",
+    "I started out learning C++, then built web apps with Node.js and Angular. Working on the infrastructure behind those apps led me to DevOps and platform engineering.",
+    "Today, most of my work is about making cloud environments easier to provision, deploy, and observe. I hold a degree in Analysis and Systems Development from UNIPAR (2023).",
   ],
 };
 
@@ -21,7 +19,6 @@ export const SOCIALS = [
     href: "https://www.linkedin.com/in/gabriel-felipe-bello/",
   },
   { label: "Instagram", href: "https://www.instagram.com/gabriel_b3llo/" },
-  { label: "Email", href: "mailto:gfbello.x@gmail.com" },
 ];
 
 export interface TechGroup {
@@ -30,53 +27,70 @@ export interface TechGroup {
 }
 
 export const TECH_GROUPS: TechGroup[] = [
-  { label: "cloud", items: ["AWS", "Azure", "GCP", "OCI"] },
-  { label: "containers", items: ["Docker", "Kubernetes", "Helm"] },
-  { label: "iac", items: ["Terraform", "Ansible", "Bash"] },
-  { label: "ci/cd", items: ["Azure DevOps", "GitHub Actions", "Buildkite"] },
-  { label: "observability", items: ["Datadog", "Dynatrace", "Grafana"] },
-  { label: "languages", items: ["TypeScript", "Python", "Bash"] },
-  { label: "ai-assisted", items: ["Claude Code", "Codex", "AI Agents"] },
-  { label: "web3", items: ["Web3", "Smart Contracts", "Blockchain"] },
+  { label: "Cloud", items: ["AWS", "Azure", "GCP", "OCI"] },
+  { label: "Containers", items: ["Docker", "Kubernetes", "Helm"] },
+  { label: "Infrastructure as code", items: ["Terraform", "Ansible"] },
+  { label: "CI/CD", items: ["Azure DevOps", "GitHub Actions", "Buildkite"] },
+  { label: "Observability", items: ["Datadog", "Dynatrace", "Grafana"] },
+  { label: "Languages", items: ["TypeScript", "Python", "Bash"] },
+  { label: "AI tools", items: ["Claude Code", "Codex", "AI Agents"] },
+  { label: "Web3", items: ["Web3", "Smart Contracts", "Blockchain"] },
 ];
 
+interface Outcome {
+  value: string;
+  qualifier?: string;
+  label: string;
+}
+
 export interface Experience {
+  id: string;
   company: string;
+  formerName?: string;
   role: string;
   period: string;
   summary: string;
+  outcome?: Outcome;
   current?: boolean;
 }
 
 export const EXPERIENCE: Experience[] = [
   {
-    company: "Infios (formerly Körber Supply Chain)",
-    role: "Cloud Operations Development Specialist",
+    id: "infios",
+    company: PROFILE.employer,
+    formerName: "Körber Supply Chain",
+    role: PROFILE.title,
     period: "Mar 2024 — Present",
     summary:
-      "Migrated legacy provisioning from PowerShell to Terraform/Bash (70% reduction in setup time). Engineered CI/CD pipelines with Azure DevOps and Helm. Integrated Dynatrace and Datadog observability on OCI Kubernetes clusters.",
+      "Replaced legacy PowerShell provisioning with Terraform and Bash. Built deployment pipelines with Azure DevOps and Helm, and added Dynatrace and Datadog to Kubernetes clusters on OCI.",
+    outcome: { value: "−70%", label: "Provisioning setup time" },
     current: true,
   },
   {
+    id: "trimble",
     company: "Trimble",
     role: "DevOps Engineer",
     period: "Jan 2023 — Mar 2024",
     summary:
-      "Maintained and created infrastructure for large-scale applications serving up to 300k users, including products for FedEx. Stack: AWS, Azure, Kubernetes, Serverless, Terraform, Buildkite, DataDog.",
+      "Built and maintained infrastructure for large-scale applications, including products for FedEx. Worked across AWS, Azure, Kubernetes, and Terraform.",
+    outcome: { value: "300k", qualifier: "up to", label: "Application users" },
   },
   {
+    id: "ezops",
     company: "EZOps",
     role: "DevOps Engineer",
     period: "Aug 2022 — Jan 2023",
     summary:
-      "Led cloud infrastructure on AWS, Docker, Kubernetes, Terraform and Grafana. Achieved 99.10% uptime, scaled to handle 40% traffic increase, and cut deployment time by 50%.",
+      "Led AWS infrastructure work, handling 40% more traffic while reaching 99.10% uptime.",
+    outcome: { value: "−50%", label: "Deployment time" },
   },
   {
+    id: "wing-corp",
     company: "Wing Corp",
     role: "Jr. DevOps Engineer",
     period: "Nov 2021 — Aug 2022",
     summary:
-      "CI/CD pipelines, Kubernetes administration, and AWS EKS/ECR for 30+ high-demand e-commerces via GitHub Actions and Bitbucket Pipelines.",
+      "Managed Kubernetes on AWS and built CI/CD pipelines for more than 30 e-commerce sites using GitHub Actions and Bitbucket Pipelines.",
   },
 ];
 
