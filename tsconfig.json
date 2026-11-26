@@ -1,5 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "src/**/*", "astro.config.mjs", "tailwind.config.mjs"],
+  "exclude": ["dist", "legacy-angular"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

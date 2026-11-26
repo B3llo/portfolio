@@ -1,0 +1,106 @@
+/* One motion language: horizontal cuts in the name, case and section typography.
+   The unscripted and reduced-motion views are always complete compositions. */
+.hero[data-machining] {
+  position: relative;
+  grid-template: 'identity machine' auto 'copy machine' auto / minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(.6rem, 2.6vw, 2rem);
+  row-gap: .9rem;
+  padding-block: clamp(2.8rem, 5vw, 4.7rem) clamp(2.4rem, 4vw, 3.8rem);
+}
+.hero-identity { grid-area: identity; align-self: end; }
+.hero[data-machining] .hero-copy { grid-area: copy; align-self: start; }
+.hero[data-machining] h1 { width: max-content; max-width: 100%; margin: .68rem 0 0; font-family: 'Space Grotesk', system-ui, sans-serif; }
+.hero-first { display: block; margin-bottom: .25rem; color: var(--ink); font: 500 clamp(1.65rem, 3.3vw, 2.8rem)/1.05 var(--display); letter-spacing: -.045em; }
+.cut-name { display: block; position: relative; isolation: isolate; font: 700 clamp(5rem, 10.4vw, 9.3rem)/.9 'Space Grotesk', system-ui, sans-serif; letter-spacing: -.083em; text-transform: uppercase; }
+.name-size { visibility: hidden; }
+.name-slice { position: absolute; inset: 0; color: var(--ink); }
+.slice-0 { clip-path: inset(-15% -5% 67% -5%); }
+.slice-1 { clip-path: inset(33% -5% 34% -5%); }
+.slice-2 { clip-path: inset(66% -5% -15% -5%); }
+[data-signal-ready] .hero [data-signal-heading]::after { content: none; }
+.chassis { grid-area: machine; align-self: stretch; display: grid; place-items: center; min-width: 0; }
+.chassis-art { width: 100%; max-width: 34rem; height: auto; overflow: visible; }
+.chassis-art .metal { fill: var(--control-line); stroke: var(--ink); stroke-width: 1.2; }
+.chassis-art .lid-metal { fill: color-mix(in srgb, var(--ink) 56%, var(--surface)); }
+.vent-hole { fill: var(--canvas); }
+.etch { stroke: var(--canvas); stroke-width: 1.4; }
+.lid-name { fill: var(--canvas); font: 600 19px var(--mono); letter-spacing: -.045em; }
+.face-front { stroke: var(--muted); fill: var(--console-bar); }
+.face-side { stroke: var(--muted); fill: var(--surface); }
+.power-line { stroke: var(--phosphor); stroke-width: 2; }
+.power-led, .pcb-edge { fill: var(--phosphor); }
+.draft-grid { stroke: var(--line); stroke-width: .8; }
+.case-guides { stroke: var(--control-line); opacity: .55; }
+.chip-face, .port { fill: var(--canvas); stroke: var(--muted); stroke-width: 1; }
+.vent-line { stroke: var(--muted); stroke-width: 2; }
+.pcb { fill: color-mix(in srgb, var(--phosphor) 20%, var(--canvas)); stroke: var(--phosphor); }
+.copper { stroke: var(--phosphor); stroke-width: 1; }
+.fan-ring, .ram { fill: var(--surface); stroke: var(--muted); }
+.fan-blade, .screw { fill: var(--muted); }
+/* A slight static separation makes the form readable even without motion. */
+.case-lid { transform: translate(0px,-10px); }
+.case-base { transform: translate(0px,5px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion-ready] .slice-0 { transform: translate(calc(var(--open,0) * -0.26em), calc(var(--open,0) * -.035em)); }
+  [data-motion-ready] .slice-1 { transform: translateX(calc(var(--open,0) * .27em)); }
+  [data-motion-ready] .slice-2 { transform: translateX(calc(var(--open,0) * -.1em)); }
+  [data-motion-ready] .case-lid { transform: translate(calc(var(--lid,0) * 48px),calc(-10px - var(--lid,0) * 96px)); }
+  [data-motion-ready] .case-fan { transform: translate(calc(var(--fan,0) * -32px),calc(var(--fan,0) * -33px)); }
+  [data-motion-ready] .case-memory { transform: translate(calc(var(--memory,0) * 26px),calc(var(--memory,0) * -27px)); }
+  [data-motion-ready] .case-board { transform: translate(calc(var(--board,0) * -21px),calc(var(--board,0) * -24px)); }
+  [data-motion-ready] .case-base { transform: translate(calc(var(--base,0) * 9px),calc(5px + var(--base,0) * 25px)); }
+  [data-motion-ready] .chassis-art { animation: seat .85s cubic-bezier(.17,.68,.26,1) both; }
+  @keyframes seat { from { transform: translateY(1.8rem) rotate(-6deg) scale(.91); } to { transform: none; } }
+  /* Motion belongs to the actual titles and linked entries, not a progress meter. */
+  [data-motion-ready] .section .signal-label {
+    transform-origin: left bottom;
+    transform: translateX(calc(var(--arrival,0) * .82em)) rotate(calc(var(--arrival,0) * -2deg));
+  }
+  [data-motion-ready] .project-body, [data-motion-ready] .job-description {
+    /* Translate the type on its own plane; perspective resampled the letters
+       and made slow scrolling look like a series of focus changes. */
+    transform: translate(calc(var(--arrival,0) * var(--travel, 4.2rem)), calc(var(--arrival,0) * .38rem));
+  }
+  [data-motion-ready] .project:nth-child(even) .project-body { --travel: -3.6rem; }
+  [data-motion-ready] .project:focus-within .project-body, [data-motion-ready] .job:focus-within .job-description { transform: none; }
+}
+/* One short native sticky interval, not a viewport-height pinned scene. On very
+   short screens keep the space for reading instead of holding a cropped hero. */
+@media (min-height: 30rem) and (prefers-reduced-motion: no-preference) {
+  [data-motion-ready] .hero-stage::after {
+    content: ''; display: block; height: clamp(205px, 32svh, 280px);
+  }
+  [data-motion-ready] .hero-stage .hero { position: sticky; top: var(--site-header-height); }
+}
+@media (min-width: 47.01rem) and (min-height: 35rem) and (prefers-reduced-motion: no-preference) {
+  [data-motion-ready] .projects-intro { position: sticky; top: calc(var(--site-header-height) + 2.25rem); align-self: start; }
+}
+@media (max-width: 47rem) {
+  .hero[data-machining] { grid-template: 'identity' auto 'machine' auto 'copy' auto / minmax(0,1fr); gap: .65rem; }
+  .hero[data-machining] .hero-identity, .hero[data-machining] .hero-copy { z-index: 1; }
+  .cut-name { font-size: clamp(5rem, 18.8vw, 8rem); }
+  .chassis { width: min(100%, clamp(15rem, 65vw, 24rem)); justify-self: end; }
+  .chassis-art { width: 100%; }
+  [data-motion-ready] .project-body, [data-motion-ready] .job-description { --travel: 2.5rem; }
+  [data-motion-ready] .project:nth-child(even) .project-body { --travel: -2.5rem; }
+}
+
+/* A mechanical index for the reverse-chronological career record. Each stop
+   corresponds to the real start year and employer of the row passing it. */
+.year-reel { display: none; }
+@media (min-width: 47.01rem) and (min-height: 35rem) and (prefers-reduced-motion: no-preference) {
+  [data-motion-ready] .career-record { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 2.25fr); gap: 1rem clamp(1.45rem, 6vw, 5.4rem); }
+  [data-motion-ready] .career-intro { position: sticky; top: calc(var(--site-header-height) + 2.25rem); align-self: start; }
+  [data-motion-ready] .career-record .job { grid-template-columns: minmax(0, 1fr) minmax(0,.38fr); align-items: start; }
+  [data-motion-ready] .career-record .job-period { grid-column: 1 / -1; margin-bottom: .35rem; }
+  [data-motion-ready] .career-record .job-outcome { grid-column: 2; }
+  [data-motion-ready] .year-reel { display: block; margin-top: 2.3rem; padding-left: .75rem; border-left: 2px solid var(--phosphor); }
+  .reel-label { color: var(--muted); font: 400 .75rem/1.4 var(--mono); }
+  .reel-window, .reel-employer { overflow: hidden; }
+  .reel-window { height: 1em; margin-block: .15rem .35rem; color: var(--ink); font: 500 clamp(2.5rem, 6.5vw, 5.5rem)/1 'Space Grotesk', system-ui, sans-serif; letter-spacing: -.065em; font-variant-numeric: tabular-nums; }
+  .reel-employer { height: 1.5em; color: var(--phosphor); font: 600 .86rem/1.5 var(--mono); }
+  .reel-tape { transform: translateY(var(--tape-y, 0%)); }
+  .reel-tape span { display: block; }
+}

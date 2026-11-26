@@ -1,34 +1,40 @@
 ---
 import Base from "../layouts/Base.astro";
+import "../styles/motion.css";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import SignalRail from "../components/SignalRail.astro";
+import Projects from "../components/Projects.astro";
+import Experience from "../components/Experience.astro";
 import About from "../components/About.astro";
 import Stack from "../components/Stack.astro";
-import Experience from "../components/Experience.astro";
-import Certs from "../components/Certs.astro";
-import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
-import BackToTop from "../components/BackToTop.astro";
+import PortfolioTerminal from "../components/PortfolioTerminal.astro";
+import { getProjects } from "../data/github";
 
-const title = "Gabriel F. Bello — DevOps Engineer | AWS, Kubernetes, Terraform";
+const projectFeed = await getProjects();
+
+const title = "Gabriel F. Bello — DevOps Engineer";
 const description =
-  "Gabriel F. Bello, DevOps Engineer and Cloud Operations Specialist at Infios. CKA certified. Building and scaling infrastructure on AWS, Kubernetes and Terraform.";
+  "Gabriel F. Bello, DevOps engineer and Cloud Operations Development Specialist at Infios. Cloud infrastructure, Kubernetes, Terraform, and CI/CD.";
 ---
 
 <Base title={title} description={description}>
   <Header />
-  <main id="main">
-    <div id="top">
-      <Hero />
-    </div>
-    <About />
-    <Stack />
+  <main id="main" tabindex="-1">
+    <SignalRail />
+    <div class="hero-stage"><Hero /></div>
+    <Projects feed={projectFeed} />
     <Experience />
-    <Certs />
-    <Projects />
+    <div class="shell section about-grid">
+      <div>
+        <About />
+        <PortfolioTerminal projects={projectFeed.projects} />
+      </div>
+      <Stack />
+    </div>
     <Contact />
   </main>
   <Footer />
-  <BackToTop />
 </Base>
